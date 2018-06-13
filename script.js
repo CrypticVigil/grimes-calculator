@@ -308,16 +308,15 @@ function setStitches(stitches) {
 
 // variables for heat application
 
-var height1, width1, height2, width2;
 var HAitem1 = 0;
 var HAitem2 = 0;
 
 // calculate how many items can fit on the roll
 
-function checkBoth(height, width) {
+function checkBoth(height, width, qty) {
 	var lower, perRow, perRowHeight, priceWidth, priceHeight;
 
-	if (quantity < 6) {
+	if (qty < 6) {
 
 		priceHeight = (height * 0.5);
 		priceWidth = (width * 0.5);
@@ -377,7 +376,7 @@ function checkBoth(height, width) {
 
 	}
 
-	return lower;
+	return Number(lower.toFixed(2));
 }
 
 function appCost(inputQty) {
@@ -399,6 +398,33 @@ function appCost(inputQty) {
 	}
 
 	return application;
+
+}
+
+// retrieve or calculate the cost for the applied decal
+
+function itemCost(HAqty, num) {
+
+	let itemCost = 0;
+
+	if (getValue("decal" + num)) {
+
+		itemCost = getValue("decal" + num);
+
+	} else if (getValue("height" + num)) {
+
+		let HAwidth = getValue("width" + num) || 18;
+		let HAheight = getValue("height" + num);
+
+		itemCost = checkBoth(HAheight, HAwidth, HAqty);
+
+	} else {
+
+		itemCost = getValue("heatPresets" + num);
+	
+	}
+	console.log(itemCost + " : " + num)
+	return itemCost;
 
 }
 
@@ -478,78 +504,23 @@ function calculate() {
 
 	if (getValue('heatPresets1') != 0 || getValue('height1') || getValue('decal1')) {
 
-		if (getValue("decal1")) {
-
-			HAitem1 = getValue("decal1");
-
-		} else if (getValue("height1")) {
-
-			width1 = getValue("width1") || 18;
-			height1 = getValue("height1");
-
-			HAitem1 = checkBoth(height1, width1);
-
-		} else {
-
-			HAitem1 = getValue("heatPresets1");
-		
-		}
-
-		if (getValue("decal2")) {
-
-			HAitem2 = getValue("decal2");
-
-		} else if (getValue("height2")) {
-
-			width2 = getValue("width2") || 18;
-			height2 = getValue("height2");
-
-			HAitem2 = checkBoth(height2, width2);
-
-		} else {
-
-			HAitem2 = getValue("heatPresets2");
-		
-		}
-
 		var heatQty1 = quantitiesList[arrayQty];
 		var heatQty2 = quantitiesList[arrayQty + 1];
 		var heatQty3 = quantitiesList[arrayQty + 2];
 		var heatQty4 = quantitiesList[arrayQty + 3];
 
-		if (HAitem2 === 0) {
+		quote1 += itemCost(heatQty1, "1") + itemCost(heatQty1, "2") + (appCost(heatQty1 * 2) * 2);
 
-			quote1 += HAitem1 + appCost(heatQty1);
+		if (arrayQty != 13) {
+			quote2 += itemCost(heatQty2, "1") + itemCost(heatQty2, "2") + (appCost(heatQty2 * 2) * 2);
+		}
 
-			if (arrayQty != 13) {
-				quote2 += HAitem1 + appCost(heatQty2);
-			}
+		if (arrayQty != 12 && arrayQty != 13) {
+			quote3 += itemCost(heatQty3, "1") + itemCost(heatQty3, "2") + (appCost(heatQty3 * 2) * 2);
+		}
 
-			if (arrayQty != 12 && arrayQty != 13) {
-				quote3 += HAitem1 + appCost(heatQty3);
-			}
-
-			if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
-				quote4 += HAitem1 + appCost(heatQty4);
-			}
-
-		} else {
-
-			quote1 += HAitem1 + HAitem2 + (appCost(heatQty1 * 2) * 2);
-
-			if (arrayQty != 13) {
-				quote2 += HAitem1 + HAitem2 + (appCost(heatQty2 * 2) * 2);
-			}
-
-			if (arrayQty != 12 && arrayQty != 13) {
-				quote3 += HAitem1 + HAitem2 + (appCost(heatQty3 * 2) * 2);
-			}
-
-			if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
-				quote4 += HAitem1 + HAitem2 + (appCost(heatQty4 * 2) * 2);			
-
-			}
-
+		if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
+			quote4 += itemCost(heatQty4, "1") + itemCost(heatQty4, "2") + (appCost(heatQty4 * 2) * 2);			
 		}
 
 	}
