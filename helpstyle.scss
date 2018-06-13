@@ -1,0 +1,51 @@
+// ---- VARIABLES ---- //
+
+$darkestGray: #3c4044;
+$darkerGray: #5a6066;
+$coolGray: #788088;
+$lightGray: #aab0b6;
+$lighterGray: #d8dce0;
+$lightestGray: #ecf0f4;
+
+$darkBlue: #003c60;
+$lightBlue: #00aadc;
+
+$green: #72bf44;
+
+$input: 36px;
+$unit: 24px;
+$sixth: 4px;
+
+// ---- PAGE STRUCTURE ---- //
+
+html {
+	background-color: $lightestGray;
+	color: $darkBlue;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	line-height: 1.5em;
+}
+
+.wrapper {
+	width: 1080px;
+	margin: auto;
+}
+
+h1 {
+	padding-bottom: 12px;
+	border-bottom: 1px solid $lighterGray;
+}
+
+h2 {
+	color: $coolGray;
+	padding-bottom: 8px;
+	border-bottom: 1px solid $lighterGray;
+}
+
+ul {
+	padding-left: 24px;
+}
+
+li {
+	margin-bottom: 8px;
+}
