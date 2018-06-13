@@ -81,8 +81,15 @@ function calcMarkup(blank) {
 
 	function markup(num, markup) {
 		num = num * markup;
-		num = Number(num.toFixed(2));
-		return num;
+		num = (num * 100).toFixed();
+		let lastDigit = num.slice(-1);
+		num = Number(num);
+		if (lastDigit >= 3) {
+			num = Math.ceil(num / 10) * 10;
+		} else {
+			num = Math.floor(num / 10) * 10;
+		}
+		return (num / 100);
 	}
 
 	if (blank < 5) {
