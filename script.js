@@ -430,7 +430,6 @@ function itemCost(HAqty, num) {
 		itemCost = getValue("heatPresets" + num);
 	
 	}
-	console.log(itemCost + " : " + num)
 	return itemCost;
 
 }
@@ -511,23 +510,43 @@ function calculate() {
 
 	if (getValue('heatPresets1') != 0 || getValue('height1') || getValue('decal1')) {
 
-		var heatQty1 = quantitiesList[arrayQty];
-		var heatQty2 = quantitiesList[arrayQty + 1];
-		var heatQty3 = quantitiesList[arrayQty + 2];
-		var heatQty4 = quantitiesList[arrayQty + 3];
+		let heatQty1 = quantitiesList[arrayQty];
+		let heatQty2 = quantitiesList[arrayQty + 1];
+		let heatQty3 = quantitiesList[arrayQty + 2];
+		let heatQty4 = quantitiesList[arrayQty + 3];
 
-		quote1 += itemCost(heatQty1, "1") + itemCost(heatQty1, "2") + (appCost(heatQty1 * 2) * 2);
+		if (getValue('heatPresets2') != 0 || getValue('height2') || getValue('decal2')) {
 
-		if (arrayQty != 13) {
-			quote2 += itemCost(heatQty2, "1") + itemCost(heatQty2, "2") + (appCost(heatQty2 * 2) * 2);
-		}
+			quote1 += itemCost(heatQty1, "1") + itemCost(heatQty1, "2") + (appCost(heatQty1 * 2) * 2);
 
-		if (arrayQty != 12 && arrayQty != 13) {
-			quote3 += itemCost(heatQty3, "1") + itemCost(heatQty3, "2") + (appCost(heatQty3 * 2) * 2);
-		}
+			if (arrayQty != 13) {
+				quote2 += itemCost(heatQty2, "1") + itemCost(heatQty2, "2") + (appCost(heatQty2 * 2) * 2);
+			}
 
-		if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
-			quote4 += itemCost(heatQty4, "1") + itemCost(heatQty4, "2") + (appCost(heatQty4 * 2) * 2);			
+			if (arrayQty != 12 && arrayQty != 13) {
+				quote3 += itemCost(heatQty3, "1") + itemCost(heatQty3, "2") + (appCost(heatQty3 * 2) * 2);
+			}
+
+			if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
+				quote4 += itemCost(heatQty4, "1") + itemCost(heatQty4, "2") + (appCost(heatQty4 * 2) * 2);			
+			}
+
+		} else {
+
+			quote1 += itemCost(heatQty1, "1") + (appCost(heatQty1));
+
+			if (arrayQty != 13) {
+				quote2 += itemCost(heatQty2, "1") + (appCost(heatQty2));
+			}
+
+			if (arrayQty != 12 && arrayQty != 13) {
+				quote3 += itemCost(heatQty3, "1") + (appCost(heatQty3));
+			}
+
+			if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
+				quote4 += itemCost(heatQty4, "1") + (appCost(heatQty4));			
+			}
+
 		}
 
 	}
