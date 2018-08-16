@@ -1,11 +1,11 @@
 // define variables
 
-var garment, quantity, firstImprintColors;
-var secondImprintColors, thirdImprintColors, fourthImprintColors; 
-var time, totalHours;
-var silkscreens = 0;
-var hourlyRate = [180, 170, 160, 150, 140, 135, 130, 125, 120];
-var qtyIndex;
+let garment, quantity, firstImprintColors;
+let secondImprintColors, thirdImprintColors, fourthImprintColors; 
+let time, totalHours;
+let silkscreens = 0;
+let hourlyRate = [180, 170, 160, 150, 140, 135, 130, 125];
+let qtyIndex;
 
 // gets value from HTML element
 
@@ -39,8 +39,8 @@ function calcTotal(item) {
 // calculates the time the job will take to print
 
 function calcTime() {
-	var hours, minutes;
-	var multiply = [0, 0.75, 1.125, 1.5, 1.875, 2.25, 2.625];
+	let hours, minutes;
+	let multiply = [0, 0.75, 1.125, 1.5, 1.875, 2.25, 2.625];
 	time = quantity * multiply[firstImprintColors];
 	time += (quantity * multiply[secondImprintColors]);
 	time += (quantity * multiply[thirdImprintColors]);
@@ -80,16 +80,14 @@ function setQuantity() {
 		qtyIndex = 2;
 	} else if (quantity >= 100 && quantity < 200) {
 		qtyIndex = 3;
-	} else if (quantity >= 200 && quantity < 250) {
+	} else if (quantity >= 200 && quantity < 300) {
 		qtyIndex = 4;
-	} else if (quantity >= 250 && quantity < 300) {
-		qtyIndex = 5;
 	} else if (quantity >= 300 && quantity < 400) {
-		qtyIndex = 6;
+		qtyIndex = 5;
 	} else if (quantity >= 400 && quantity < 500) {
-		qtyIndex = 7;
+		qtyIndex = 6;
 	} else if (quantity >= 500 && quantity < 1000) {
-		qtyIndex = 8;
+		qtyIndex = 7;
 	}
 
 }
@@ -111,7 +109,7 @@ function calculate() {
 
 	setValue("time", calcTime());
 
-	var quote = garment + (silkscreens * 12 / quantity) + (totalHours * hourlyRate[qtyIndex] / quantity);
+	let quote = garment + (silkscreens * 12 / quantity) + (totalHours * hourlyRate[qtyIndex] / quantity);
 
 	setValue("qty1", quantity + " or more");
 	setValue("cost1", quote.toFixed(2));
@@ -128,7 +126,7 @@ document.getElementById("submit").onclick = function() {
 
 document.addEventListener('keypress', function(e) {
 
-	var key = e.which || e.keyCode;
+	let key = e.which || e.keyCode;
 	if (key === 13) {
 
 		calculate();

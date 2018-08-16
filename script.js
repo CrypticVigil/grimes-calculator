@@ -1,20 +1,20 @@
 // define variables and price chart arrays
 
-var garment, quantity, arrayQty, silkscreens, firstImprintColors;
-var secondImprintColors, thirdImprintColors, fourthImprintColors, totalPrice; 
-var adjust = [];
+let garment, quantity, arrayQty, silkscreens, firstImprintColors;
+let secondImprintColors, thirdImprintColors, fourthImprintColors, totalPrice; 
+let adjust = [];
 
 // cost for single silkscreen, starting at 1 item, then 3 or more
 
-var silkscreenCost = [ 12, 6, 2, 1.5, 1, 0.60, 0.40, 0.30, 0.20, 0.16, 0.125, 0.1, 0.07, 0.05 ];
+let silkscreenCost = [ 12, 6, 2, 1.5, 1, 0.60, 0.40, 0.30, 0.20, 0.16, 0.125, 0.1, 0.07, 0.05 ];
 
 // array of price break quantities
 
-var quantitiesList = [ 1, 3, 6, 9, 12, 18, 24, 36, 48, 60, 80, 100, 150, 200 ];
+let quantitiesList = [ 1, 3, 6, 9, 12, 18, 24, 36, 48, 60, 80, 100, 150, 200 ];
 
 // this chart contains the pricing info for the first imprint
 
-var firstImprintChart = [
+let firstImprintChart = [
 	[0, 11, 14, 17, 20, 23, 26],			// 1 or more
 	[0, 9, 11.5, 14, 16.5, 19, 21.5],		// 3 or more
 	[0, 7, 9, 11, 13, 15, 17],				// 6 or more
@@ -33,7 +33,7 @@ var firstImprintChart = [
 
 // this chart contains the pricing info for the second imprint
 
-var secondImprintChart = [
+let secondImprintChart = [
 	[0, 8, 11, 14, 17, 20, 23],				// 1 or more
 	[0, 6.5, 9, 11.5, 14, 16.5, 19],		// 3 or more
 	[0, 5, 7, 9, 11, 13, 15],				// 6 or more
@@ -167,7 +167,7 @@ function numSilkscreens() {
 
 function roundOff(value, adjustment) {
 	value = (value * 100).toFixed();
-	var lastDigit = value.toString().slice(-1);
+	let lastDigit = value.toString().slice(-1);
 	if (lastDigit >= 4) {
 		value = Math.ceil(value / 10) * 10;
 	} else {
@@ -181,10 +181,10 @@ function roundOff(value, adjustment) {
 
 function calcCost(key) {
 	
-	var firstImprintCost = Number((firstImprintChart[key])[firstImprintColors]);
-	var secondImprintCost = Number((secondImprintChart[key])[secondImprintColors]);
-	var thirdImprintCost = Number((secondImprintChart[key])[thirdImprintColors]);
-	var fourthImprintCost = Number((secondImprintChart[key])[fourthImprintColors]);
+	let firstImprintCost = Number((firstImprintChart[key])[firstImprintColors]);
+	let secondImprintCost = Number((secondImprintChart[key])[secondImprintColors]);
+	let thirdImprintCost = Number((secondImprintChart[key])[thirdImprintColors]);
+	let fourthImprintCost = Number((secondImprintChart[key])[fourthImprintColors]);
 
 	totalPrice = (Number(silkscreenCost[key]) * silkscreens) + firstImprintCost +
 		secondImprintCost + thirdImprintCost + fourthImprintCost;
@@ -201,8 +201,8 @@ function calcTotal(item) {
 // calculates a rough estimate of the time the job will take to print
 
 function calcTime() {
-	var time, hours, minutes;
-	var multiply = [0, 0.8, 1.3, 1.7, 2, 2.2, 2.4];
+	let time, hours, minutes;
+	let multiply = [0, 0.8, 1.3, 1.7, 2, 2.2, 2.4];
 	time = quantity * multiply[firstImprintColors];
 	time += (quantity * multiply[secondImprintColors]);
 	time += (quantity * multiply[thirdImprintColors]);
@@ -224,9 +224,9 @@ function calcTime() {
 
 // variables for embroidery
 
-var stitches1st, stitches2nd, stitches3rd, stitches4th, digitize;
+let stitches1st, stitches2nd, stitches3rd, stitches4th, digitize;
 
-var embChart = {
+let embChart = {
 	6:[2, 0.75, 0.5],
 	12:[1.8, 0.6, 0.45],
 	48:[1.6, 0.55, 0.4],
@@ -235,8 +235,8 @@ var embChart = {
 
 function totalEmb(qty) {
 	
-	var amount = quantitiesList[qty];
-	var quantityEmb, totalEmbCost;
+	let amount = quantitiesList[qty];
+	let quantityEmb, totalEmbCost;
 
 	if (amount < 12 && amount >= 6) {
 		quantityEmb = 6;
@@ -272,7 +272,7 @@ function totalEmb(qty) {
 
 function calcEmb(stitches, amt) {
 
-	var cost, chartRow;
+	let cost, chartRow;
 
 	if (amt == 1) {
 		chartRow = embChart[6];
@@ -315,13 +315,13 @@ function setStitches(stitches) {
 
 // variables for heat application
 
-var HAitem1 = 0;
-var HAitem2 = 0;
+let HAitem1 = 0;
+let HAitem2 = 0;
 
 // calculate how many items can fit on the roll
 
 function checkBoth(height, width, qty) {
-	var lower, perRow, perRowHeight, priceWidth, priceHeight;
+	let lower, perRow, perRowHeight, priceWidth, priceHeight;
 
 	if (qty < 6) {
 
@@ -388,7 +388,7 @@ function checkBoth(height, width, qty) {
 
 function appCost(inputQty) {
 
-	var application;
+	let application;
 	
 	if (inputQty < 6) {
 		application = 3;
@@ -440,10 +440,10 @@ function calculate() {
 	
 	garmentCost();
 
-	var quote1 = garment;
-	var quote2 = garment;
-	var quote3 = garment;
-	var quote4 = garment;
+	let quote1 = garment;
+	let quote2 = garment;
+	let quote3 = garment;
+	let quote4 = garment;
 
 	setQty();
 
@@ -590,7 +590,7 @@ document.getElementById("submit").onclick = function() {
 
 document.addEventListener('keypress', function(e) {
 
-	var key = e.which || e.keyCode;
+	let key = e.which || e.keyCode;
 	if (key === 13) {
 
 		calculate();
