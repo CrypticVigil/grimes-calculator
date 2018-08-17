@@ -202,7 +202,7 @@ function calcTotal(item) {
 
 function calcTime() {
 	let time, hours, minutes;
-	let multiply = [0, 0.8, 1.3, 1.7, 2, 2.2, 2.4];
+	let multiply = [0, 0.75, 1.125, 1.5, 1.875, 2.25, 2.625];
 	time = quantity * multiply[firstImprintColors];
 	time += (quantity * multiply[secondImprintColors]);
 	time += (quantity * multiply[thirdImprintColors]);
