@@ -463,15 +463,15 @@ function calculate() {
 
 		quote1 += calcCost(arrayQty);
 
-		if (arrayQty != 13) {
+		if (arrayQty < 13) {
 			quote2 += calcCost(arrayQty + 1);
 		}
 
-		if (arrayQty != 12 && arrayQty != 13) {
+		if (arrayQty < 12) {
 			quote3 += calcCost(arrayQty + 2);
 		}
 
-		if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
+		if (arrayQty < 11) {
 			quote4 += calcCost(arrayQty + 3);
 		}
 
@@ -489,15 +489,15 @@ function calculate() {
 		// calculate embroidery cost
 		quote1 += totalEmb(arrayQty);
 
-		if (arrayQty != 13) {
+		if (arrayQty < 13) {
 			quote2 += totalEmb(arrayQty + 1);
 		}
 
-		if (arrayQty != 12 && arrayQty != 13) {
+		if (arrayQty < 12) {
 			quote3 += totalEmb(arrayQty + 2);
 		}
 
-		if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
+		if (arrayQty < 11) {
 			quote4 += totalEmb(arrayQty + 3);
 		}
 
@@ -519,15 +519,15 @@ function calculate() {
 
 			quote1 += itemCost(heatQty1, "1") + itemCost(heatQty1, "2") + (appCost(heatQty1 * 2) * 2);
 
-			if (arrayQty != 13) {
+			if (arrayQty < 13) {
 				quote2 += itemCost(heatQty2, "1") + itemCost(heatQty2, "2") + (appCost(heatQty2 * 2) * 2);
 			}
 
-			if (arrayQty != 12 && arrayQty != 13) {
+			if (arrayQty < 12) {
 				quote3 += itemCost(heatQty3, "1") + itemCost(heatQty3, "2") + (appCost(heatQty3 * 2) * 2);
 			}
 
-			if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
+			if (arrayQty < 11) {
 				quote4 += itemCost(heatQty4, "1") + itemCost(heatQty4, "2") + (appCost(heatQty4 * 2) * 2);			
 			}
 
@@ -535,15 +535,15 @@ function calculate() {
 
 			quote1 += itemCost(heatQty1, "1") + (appCost(heatQty1));
 
-			if (arrayQty != 13) {
+			if (arrayQty < 13) {
 				quote2 += itemCost(heatQty2, "1") + (appCost(heatQty2));
 			}
 
-			if (arrayQty != 12 && arrayQty != 13) {
+			if (arrayQty < 12) {
 				quote3 += itemCost(heatQty3, "1") + (appCost(heatQty3));
 			}
 
-			if (arrayQty != 11 && arrayQty != 12 && arrayQty != 13) {
+			if (arrayQty < 11) {
 				quote4 += itemCost(heatQty4, "1") + (appCost(heatQty4));			
 			}
 
@@ -554,7 +554,7 @@ function calculate() {
 	setValue("qty1", quantitiesList[arrayQty] + " or more");
 	setValue("cost1", roundOff(quote1, adjust[1]));
 
-	if (arrayQty == 13) {
+	if (arrayQty >= 13) {
 		setValue("qty2", "Use price chart");
 		setValue("cost2", "");
 	} else {
@@ -562,7 +562,7 @@ function calculate() {
 		setValue("cost2", roundOff(quote2, adjust[2]));			
 	}
 
-	if (arrayQty == 12 || arrayQty == 13) {
+	if (arrayQty >= 12) {
 		setValue("qty3", "Use price chart");
 		setValue("cost3", "");
 	} else {
@@ -570,7 +570,7 @@ function calculate() {
 		setValue("cost3", roundOff(quote3, adjust[3]));
 	}
 
-	if (arrayQty == 11 || arrayQty == 12 || arrayQty == 13) {
+	if (arrayQty >= 11) {
 		setValue("qty4", "Use price chart");
 		setValue("cost4", "");
 	} else {
