@@ -450,6 +450,8 @@ function calculate() {
 	let quote2 = garment;
 	let quote3 = garment;
 	let quote4 = garment;
+	let quote5 = garment;
+	let quote6 = garment;
 
 	setQty();
 
@@ -457,6 +459,8 @@ function calculate() {
 	adjust[2] = getValue("adj2");
 	adjust[3] = getValue("adj3");
 	adjust[4] = getValue("adj4");
+	adjust[5] = getValue("adj5");
+	adjust[6] = getValue("adj6");
 
 	if (getValue("colors1st")) {
 		
@@ -479,6 +483,14 @@ function calculate() {
 
 		if (arrayQty < 11) {
 			quote4 += calcCost(arrayQty + 3);
+		}
+
+		if (arrayQty < 10) {
+			quote5 += calcCost(arrayQty + 4);
+		}
+
+		if (arrayQty < 9) {
+			quote6 += calcCost(arrayQty + 5);
 		}
 
 		setValue("time", calcTime());
@@ -507,6 +519,14 @@ function calculate() {
 			quote4 += totalEmb(arrayQty + 3);
 		}
 
+		if (arrayQty < 10) {
+			quote5 += totalEmb(arrayQty + 4);
+		}
+
+		if (arrayQty < 9) {
+			quote6 += totalEmb(arrayQty + 5);
+		}
+
 		// calculate digitizing fee - $4 per thousand stitches
 		digitize = stitches1st * 4 + stitches2nd * 4 + stitches3rd * 4 + stitches4th * 4;
 			
@@ -520,6 +540,8 @@ function calculate() {
 		let heatQty2 = quantitiesList[arrayQty + 1];
 		let heatQty3 = quantitiesList[arrayQty + 2];
 		let heatQty4 = quantitiesList[arrayQty + 3];
+		let heatQty5 = quantitiesList[arrayQty + 4];
+		let heatQty6 = quantitiesList[arrayQty + 5];
 
 		if (getValue('heatPresets2') != 0 || getValue('height2') || getValue('decal2')) {
 
@@ -537,6 +559,14 @@ function calculate() {
 				quote4 += itemCost(heatQty4, "1") + itemCost(heatQty4, "2") + (appCost(heatQty4 * 2) * 2);			
 			}
 
+			if (arrayQty < 10) {
+				quote5 += itemCost(heatQty5, "1") + itemCost(heatQty5, "2") + (appCost(heatQty5 * 2) * 2);
+			}
+
+			if (arrayQty < 9) {
+				quote6 += itemCost(heatQty6, "1") + itemCost(heatQty6, "2") + (appCost(heatQty6 * 2) * 2);			
+			}
+
 		} else {
 
 			quote1 += itemCost(heatQty1, "1") + (appCost(heatQty1));
@@ -551,6 +581,14 @@ function calculate() {
 
 			if (arrayQty < 11) {
 				quote4 += itemCost(heatQty4, "1") + (appCost(heatQty4));			
+			}
+
+			if (arrayQty < 10) {
+				quote5 += itemCost(heatQty5, "1") + (appCost(heatQty5));
+			}
+
+			if (arrayQty < 9) {
+				quote6 += itemCost(heatQty6, "1") + (appCost(heatQty6));			
 			}
 
 		}
@@ -582,6 +620,22 @@ function calculate() {
 	} else {
 		setValue("qty4", quantitiesList[arrayQty + 3] + " or more");
 		setValue("cost4", roundOff(quote4, adjust[4]));
+	}
+
+	if (arrayQty >= 10) {
+		setValue("qty5", "Use price chart");
+		setValue("cost5", "");
+	} else {
+		setValue("qty5", quantitiesList[arrayQty + 4] + " or more");
+		setValue("cost5", roundOff(quote5, adjust[5]));
+	}
+
+	if (arrayQty >= 9) {
+		setValue("qty6", "Use price chart");
+		setValue("cost6", "");
+	} else {
+		setValue("qty6", quantitiesList[arrayQty + 5] + " or more");
+		setValue("cost6", roundOff(quote6, adjust[6]));
 	}
 
 	setValue("total", calcTotal(roundOff(quote1, adjust[1])).toFixed(2));

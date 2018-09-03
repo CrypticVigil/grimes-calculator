@@ -188,12 +188,12 @@ html {
 
 	.leftP {
 		float: left;
-		line-height: $unit * 2;
+		line-height: 42px;
 	}
 
 	.rightP {
 		float: right;
-		line-height: $unit * 2;
+		line-height: 42px;
 		margin-right: $unit;
 		width: $unit * 3;
 		text-align: right;
@@ -202,7 +202,7 @@ html {
 	.adjust {
 		float: right;
 		width: $unit * 2.5;
-		margin: $unit / 2;
+		margin: 9px;
 	}
 
 	.small {
@@ -230,7 +230,7 @@ html {
 		height: $unit * 4;
 		border: none;
 		border-radius: $sixth * 2;
-		margin: (123px) 0 $unit 0;
+		margin: (74px) 0 $unit 0;
 		font-size: 36px;
 		font-family: Helvetica, Arial, sans-serif;
 		background-color: $green;
