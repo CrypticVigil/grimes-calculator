@@ -227,10 +227,12 @@ function calcTime() {
 let stitches1st, stitches2nd, stitches3rd, stitches4th, digitize;
 
 let embChart = {
-	6:[2, 0.75, 0.5],
+	6:[2, 0.7, 0.5],
 	12:[1.8, 0.6, 0.45],
-	48:[1.6, 0.55, 0.4],
-	100:[1.5, 0.5, 0.4]
+	24:[1.7, 0.55, 0.45],
+	48:[1.6, 0.5, 0.4],
+	100:[1.5, 0.45, 0.4],
+	200:[1.4, 0.4, 0.4]
 };
 
 function totalEmb(qty) {
@@ -240,12 +242,16 @@ function totalEmb(qty) {
 
 	if (amount < 12 && amount >= 6) {
 		quantityEmb = 6;
-	} else if (amount < 48 && amount >= 12) {
+	} else if (amount < 24 && amount >= 12) {
 		quantityEmb = 12;
+	} else if (amount < 48 && amount >= 24) {
+		quantityEmb = 24;
 	} else if (amount < 100 && amount >= 48) {
 		quantityEmb = 48;
-	} else if (amount < 500 && amount >= 100) {
+	} else if (amount < 200 && amount >= 100) {
 		quantityEmb = 100;
+	} else if (amount < 500 && amount >= 200) {
+		quantityEmb = 200;
 	} else {
 		quantityEmb = amount;
 	}
