@@ -651,10 +651,10 @@ document.getElementById("submit").onclick = function() {
 document.addEventListener('keypress', function(e) {
 
 	let key = e.which || e.keyCode;
-	if (key === 13) {
-
+	if (key === 13 || key === 101) {
 		calculate();
-
+	} else if (key === 114) {
+		location.reload();
 	}
 
 });
