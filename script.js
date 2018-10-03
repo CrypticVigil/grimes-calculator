@@ -599,7 +599,7 @@ function calculate() {
 	setValue("cost1", roundOff(quote1, adjust[1]));
 
 	if (arrayQty >= 13) {
-		setValue("qty2", "Use price chart");
+		setValue("qty2", "");
 		setValue("cost2", "");
 	} else {
 		setValue("qty2", quantitiesList[arrayQty + 1] + " or more");
@@ -607,7 +607,7 @@ function calculate() {
 	}
 
 	if (arrayQty >= 12) {
-		setValue("qty3", "Use price chart");
+		setValue("qty3", "");
 		setValue("cost3", "");
 	} else {
 		setValue("qty3", quantitiesList[arrayQty + 2] + " or more");
@@ -615,7 +615,7 @@ function calculate() {
 	}
 
 	if (arrayQty >= 11) {
-		setValue("qty4", "Use price chart");
+		setValue("qty4", "");
 		setValue("cost4", "");
 	} else {
 		setValue("qty4", quantitiesList[arrayQty + 3] + " or more");
@@ -623,7 +623,7 @@ function calculate() {
 	}
 
 	if (arrayQty >= 10) {
-		setValue("qty5", "Use price chart");
+		setValue("qty5", "");
 		setValue("cost5", "");
 	} else {
 		setValue("qty5", quantitiesList[arrayQty + 4] + " or more");
@@ -631,7 +631,7 @@ function calculate() {
 	}
 
 	if (arrayQty >= 9) {
-		setValue("qty6", "Use price chart");
+		setValue("qty6", "");
 		setValue("cost6", "");
 	} else {
 		setValue("qty6", quantitiesList[arrayQty + 5] + " or more");
