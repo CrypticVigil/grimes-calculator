@@ -50,6 +50,19 @@ let secondImprintChart = [
 	[0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7]		// 200 or more
 ];
 
+// sets up onclick events for price levels
+
+function highlight() {
+	for (let i = 1; i <= 6; i++ ) {
+		let item = document.getElementById('qty' + i);
+		item.addEventListener('click', function() {
+			item.classList.toggle('highlighted');
+		});
+	}
+};
+
+highlight();
+
 // gets value from HTML element
 
 function getValue(id) {

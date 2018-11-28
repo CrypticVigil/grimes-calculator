@@ -145,6 +145,9 @@ html {
     margin: 0 24px 24px 0;
     float: right; }
 
+  #qty1, #qty2, #qty3, #qty4, #qty5, #qty6 {
+    cursor: pointer; }
+
   .leftP {
     float: left;
     line-height: 42px; }
@@ -155,6 +158,12 @@ html {
     margin-right: 24px;
     width: 72px;
     text-align: right; }
+
+  .highlighted {
+    padding-left: 12px;
+    border-left: 6px solid #00aadc;
+    font-weight: bold;
+    color: #00aadc; }
 
   .adjust {
     float: right;

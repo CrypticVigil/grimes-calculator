@@ -186,6 +186,10 @@ html {
 		float: right;
 	}
 
+	#qty1, #qty2, #qty3, #qty4, #qty5, #qty6 {
+		cursor: pointer;
+	}
+
 	.leftP {
 		float: left;
 		line-height: 42px;
@@ -197,6 +201,13 @@ html {
 		margin-right: $unit;
 		width: $unit * 3;
 		text-align: right;
+	}
+
+	.highlighted {
+		padding-left: 12px;
+		border-left: 6px solid $lightBlue;
+		font-weight: bold;
+		color: $lightBlue;
 	}
 
 	.adjust {
