@@ -86,7 +86,7 @@ function setQuantity() {
 		qtyIndex = 5;
 	} else if (quantity >= 400 && quantity < 500) {
 		qtyIndex = 6;
-	} else if (quantity >= 500 && quantity < 1000) {
+	} else if (quantity >= 500) {
 		qtyIndex = 7;
 	}
 

@@ -13,6 +13,8 @@ let silkscreenCost = [ 12, 6, 2, 1.5, 1, 0.60, 0.40, 0.30, 0.20, 0.16, 0.125, 0.
 let quantitiesList = [ 1, 3, 6, 9, 12, 18, 24, 36, 48, 60, 80, 100, 150, 200 ];
 
 // this chart contains the pricing info for the first imprint
+// to edit, enter the values for each quantity starting with a 0,
+// then 1-color, 2-color, etc. 
 
 let firstImprintChart = [
 	[0, 11, 14, 17, 20, 23, 26],			// 1 or more
