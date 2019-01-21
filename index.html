@@ -1,323 +1,300 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Price Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-	<head>
+  <body>
+    <div class="wrapper">
+      <div class="leftSize">
+        <h1>Garment &amp; Quantity</h1>
 
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Price Calculator</title>
-		<link rel="stylesheet" href="style.css" />
-
-	</head>
-
-	<body>
-
-		<div class="wrapper">
-
-
-			<div class="leftSize">
-
-				<h1>Garment &amp; Quantity</h1>
-
-				<div class="row">
-					
-					<select id="garment" class="leftSelect widthTwo">
-						
-						<!--
+        <div class="row">
+          <select id="garment" class="leftSelect widthTwo">
+            <!--
 							These option values are the blank garment prices.
 							To edit the prices, change the number between the quotation marks.
 							Example: value="(new number here)"
 							-->
-					
-						<option value="3.20" selected="selected">Gildan 5000 (basic t-shirts)</option>
-						<option value="1.00">Items Supplied by Customer</option>
-						<option value="5.80">Gildan 5400 (long-sleeve t-shirts)</option>
-						<option value="3.40">Gildan 8000 (blended t-shirts)</option>
-						<option value="3.40">Gildan 2000 (cotton t-shirts)</option>
-						<option value="7.60">Gildan 2300 (pocket t-shirts)</option>
-						<option value="6.40">Gildan 2400 (long-sleeve t-shirts)</option>
-						<option value="3.20">Jerzees 29M (50/50 t-shirts)</option>
-						<option value="7.20">Jerzees 29P (pocket t-shirts)</option>
-						<option value="7.20">Jerzees 29L (long-sleeve t-shirts)</option>
-						<option value="4.60">Hanes 5180 (beefy tees)</option>
-						
-						<option value="5.20">UltraClub 8101 (basic caps)</option>
-						<option value="10.60">Richardson 585 (flexfit caps)</option>
-						<option value="4.00">UltraClub 8130/8131 (knit beanies)</option>
-						<option value="11.00">UltraClub 8540 (blended polos)</option>
-						<option value="10.20">Port Authority K540 (performance polos)</option>
 
-						<option value="5.80">Gildan 42000 (polyester t-shirts)</option>
-						<option value="4.60">Augusta 790 (polyester t-shirts)</option>
-						<option value="8.80">Gildan 18000 (crew-neck sweatshirts)</option>
-						<option value="13.20">Gildan 18500 (pullover hoodies)</option>
-						<option value="15.60">Gildan 18600 (full-zip hoodies)</option>
-						<option value="9.60">Gildan 12000 (crew-neck sweatshirts)</option>
-						<option value="14.60">Gildan 12500 (pullover hoodies)</option>
-						<option value="21.20">Gildan 12600 (full-zip hoodies)</option>
+            <option value="3.20" selected="selected">Gildan 5000 (basic t-shirts)</option>
+            <option value="1.00">Items Supplied by Customer</option>
+            <option value="5.80">Gildan 5400 (long-sleeve t-shirts)</option>
+            <option value="3.40">Gildan 8000 (blended t-shirts)</option>
+            <option value="3.40">Gildan 2000 (cotton t-shirts)</option>
+            <option value="7.60">Gildan 2300 (pocket t-shirts)</option>
+            <option value="6.40">Gildan 2400 (long-sleeve t-shirts)</option>
+            <option value="3.20">Jerzees 29M (50/50 t-shirts)</option>
+            <option value="7.20">Jerzees 29P (pocket t-shirts)</option>
+            <option value="7.20">Jerzees 29L (long-sleeve t-shirts)</option>
+            <option value="4.60">Hanes 5180 (beefy tees)</option>
 
-					</select><!--
-					--><input id="exactGar" class="minusCheckbox" placeholder="Garment Cost"><!--
-					--><input type="checkbox" id="markup" class="checkbox" checked><!--
+            <option value="5.20">UltraClub 8101 (basic caps)</option>
+            <option value="10.60">Richardson 585 (flexfit caps)</option>
+            <option value="4.00">UltraClub 8130/8131 (knit beanies)</option>
+            <option value="11.00">UltraClub 8540 (blended polos)</option>
+            <option value="10.20">Port Authority K540 (performance polos)</option>
+
+            <option value="5.80">Gildan 42000 (polyester t-shirts)</option>
+            <option value="4.60">Augusta 790 (polyester t-shirts)</option>
+            <option value="8.80">Gildan 18000 (crew-neck sweatshirts)</option>
+            <option value="13.20">Gildan 18500 (pullover hoodies)</option>
+            <option value="15.60">Gildan 18600 (full-zip hoodies)</option>
+            <option value="9.60">Gildan 12000 (crew-neck sweatshirts)</option>
+            <option value="14.60">Gildan 12500 (pullover hoodies)</option>
+            <option value="21.20">Gildan 12600 (full-zip hoodies)</option> </select
+          ><!--
+					--><input id="exactGar" class="minusCheckbox" placeholder="Garment Cost" /><!--
+					--><input type="checkbox" id="markup" class="checkbox" checked /><!--
 
 					--><select id="quantity" class="leftSelect widthTwo">
-							<option value="1">1 or more</option>
-							<option value="3">3 or more</option>
-							<option value="6">6 or more</option>
-							<option value="9">9 or more</option>
-							<option value="12" selected="selected">12 or more</option>
-							<option value="18">18 or more</option>
-							<option value="24">24 or more</option>
-							<option value="36">36 or more</option>
-							<option value="48">48 or more</option>
-							<option value="60">60 or more</option>
-							<option value="80">80 or more</option>
-							<option value="100">100 or more</option>
-							<option value="150">150 or more</option>
-							<option value="200">200 or more</option>
-					</select><!--
-					--><input id="exactQty" placeholder="Exact Quantity">
+            <option value="1">1 or more</option>
+            <option value="3">3 or more</option>
+            <option value="6">6 or more</option>
+            <option value="9">9 or more</option>
+            <option value="12" selected="selected">12 or more</option>
+            <option value="18">18 or more</option>
+            <option value="24">24 or more</option>
+            <option value="36">36 or more</option>
+            <option value="48">48 or more</option>
+            <option value="60">60 or more</option>
+            <option value="80">80 or more</option>
+            <option value="100">100 or more</option>
+            <option value="150">150 or more</option>
+            <option value="200">200 or more</option> </select
+          ><!--
+					--><input id="exactQty" placeholder="Exact Quantity" />
+        </div>
 
-				</div>
+        <h1 class="marginTop">Screen Printing</h1>
 
-				<h1 class="marginTop">Screen Printing</h1>
-
-				<div class="row">
-					
-					<select id="silkscreens" class="leftSelect widthOne">
-						<option value="0" selected="selected">Silkscreens</option>
-						<option value="1">1 screen</option>
-						<option value="2">2 screens</option>
-						<option value="3">3 screens</option>
-						<option value="4">4 screens</option>
-						<option value="5">5 screens</option>
-						<option value="6">6 screens</option>
-						<option value="7">7 screens</option>
-						<option value="8">8 screens</option>
-						<option value="9">9 screens</option>
-						<option value="10">10 screens</option>
-						<option value="11">11 screens</option>
-						<option value="12">12 screens</option>
-					</select><!--
+        <div class="row">
+          <select id="silkscreens" class="leftSelect widthOne">
+            <option value="0" selected="selected">Silkscreens</option>
+            <option value="1">1 screen</option>
+            <option value="2">2 screens</option>
+            <option value="3">3 screens</option>
+            <option value="4">4 screens</option>
+            <option value="5">5 screens</option>
+            <option value="6">6 screens</option>
+            <option value="7">7 screens</option>
+            <option value="8">8 screens</option>
+            <option value="9">9 screens</option>
+            <option value="10">10 screens</option>
+            <option value="11">11 screens</option>
+            <option value="12">12 screens</option> </select
+          ><!--
 
 					--><select id="colors1" class="leftSelect widthOne">
-						<option value="0" selected="selected">1st Imprint</option>
-						<option value="1">1-color</option>
-						<option value="2">2-colors</option>
-						<option value="3">3-colors</option>
-						<option value="4">4-colors</option>
-						<option value="5">5-colors</option>
-						<option value="6">6-colors</option>
-						</select><!--
+            <option value="0" selected="selected">1st Imprint</option>
+            <option value="1">1-color</option>
+            <option value="2">2-colors</option>
+            <option value="3">3-colors</option>
+            <option value="4">4-colors</option>
+            <option value="5">5-colors</option>
+            <option value="6">6-colors</option> </select
+          ><!--
 
 					--><select id="colors2" class="leftSelect widthOne">
-						<option value="0" selected="selected">2nd Imprint</option>
-						<option value="1">1-color</option>
-						<option value="2">2-colors</option>
-						<option value="3">3-colors</option>
-						<option value="4">4-colors</option>
-						<option value="5">5-colors</option>
-						<option value="6">6-colors</option>
-						</select><!--
+            <option value="0" selected="selected">2nd Imprint</option>
+            <option value="1">1-color</option>
+            <option value="2">2-colors</option>
+            <option value="3">3-colors</option>
+            <option value="4">4-colors</option>
+            <option value="5">5-colors</option>
+            <option value="6">6-colors</option> </select
+          ><!--
 
-					--><input id="exactScr" placeholder="Exact Scr."><!--
+					--><input id="exactScr" placeholder="Exact Scr." /><!--
 
 					--><select id="colors3" class="leftSelect widthOne">
-						<option value="0" selected="selected">3rd Imprint</option>
-						<option value="1">1-color</option>
-						<option value="2">2-colors</option>
-						<option value="3">3-colors</option>
-						<option value="4">4-colors</option>
-						<option value="5">5-colors</option>
-						<option value="6">6-colors</option>
-						</select><!--
+            <option value="0" selected="selected">3rd Imprint</option>
+            <option value="1">1-color</option>
+            <option value="2">2-colors</option>
+            <option value="3">3-colors</option>
+            <option value="4">4-colors</option>
+            <option value="5">5-colors</option>
+            <option value="6">6-colors</option> </select
+          ><!--
 
 					--><select id="colors4" class="leftSelect widthOne">
-						<option value="0" selected="selected">4th Imprint</option>
-						<option value="1">1-color</option>
-						<option value="2">2-colors</option>
-						<option value="3">3-colors</option>
-						<option value="4">4-colors</option>
-						<option value="5">5-colors</option>
-						<option value="6">6-colors</option>
-						</select>
+            <option value="0" selected="selected">4th Imprint</option>
+            <option value="1">1-color</option>
+            <option value="2">2-colors</option>
+            <option value="3">3-colors</option>
+            <option value="4">4-colors</option>
+            <option value="5">5-colors</option>
+            <option value="6">6-colors</option>
+          </select>
+        </div>
 
-				</div>
+        <h1 class="marginTop">Embroidery</h1>
 
-				<h1 class="marginTop">Embroidery</h1>
+        <div class="row">
+          <input id="emb1" class="widthQuarter" placeholder="Stitches 1st" /><!--
+					--><input id="emb2" class="widthQuarter" placeholder="Stitches 2nd" /><!--
+					--><input id="emb3" class="widthQuarter" placeholder="Stitches 3rd" /><!--
+					--><input id="emb4" class="widthQuarter" placeholder="Stitches 4th" />
+        </div>
 
-				<div class="row">
-					
-					<input id="emb1" class='widthQuarter' placeholder="Stitches 1st"><!--
-					--><input id="emb2" class='widthQuarter' placeholder="Stitches 2nd"><!--
-					--><input id="emb3" class='widthQuarter' placeholder="Stitches 3rd"><!--
-					--><input id="emb4" class='widthQuarter' placeholder="Stitches 4th">
+        <h1 class="marginTop">Heat Application</h1>
 
-				</div>
+        <div class="row">
+          <select id="heatPresets1" class="leftSelect widthOne">
+            <option value="0" selected="selected">1st App. Presets</option>
+            <option value="4">Name &amp; Number</option>
+            <option value="2">2" Name or 8" Number</option>
+            <option value="1.4">6" Number</option>
+            <option value="0.8">4" Number</option>
+            <option value="0.6">1" Name</option>
+            <option value="1.2">Team Name (3 x 12")</option>
+            <option value="7.8">Name &amp; Number (2-color)</option>
+            <option value="3.4">2" Name (2-color)</option>
+            <option value="4.4">8" Number (2-color)</option>
+            <option value="3.2">6" Number (2-color)</option>
+            <option value="2.0">4" Number (2-color)</option> </select
+          ><!--
+					--><input id="height1" class="widthHA" placeholder="Height" /><!--
+					--><input id="width1" class="widthHA" placeholder="Width" /><!--
+					--><input id="decal1" class="widthHA" placeholder="Decal" />
 
-				<h1 class="marginTop">Heat Application</h1>
+          <select id="heatPresets2" class="leftSelect widthOne">
+            <option value="0" selected="selected">2nd App. Presets</option>
+            <option value="4">Name &amp; Number</option>
+            <option value="2">2" Name or 8" Number</option>
+            <option value="1.4">6" Number</option>
+            <option value="0.8">4" Number</option>
+            <option value="0.6">1" Name</option>
+            <option value="1.2">Team Name (3 x 12")</option>
+            <option value="7.8">Name &amp; Number (2-color)</option>
+            <option value="3.4">2" Name (2-color)</option>
+            <option value="4.4">8" Number (2-color)</option>
+            <option value="3.2">6" Number (2-color)</option>
+            <option value="2.0">4" Number (2-color)</option> </select
+          ><!--
+					--><input id="height2" class="widthHA" placeholder="Height" /><!--
+					--><input id="width2" class="widthHA" placeholder="Width" /><!--
+					--><input id="decal2" class="widthHA" placeholder="Decal" />
+        </div>
+      </div>
 
-				<div class="row">
-					
-					<select id="heatPresets1" class="leftSelect widthOne">
-						<option value="0" selected="selected">1st App. Presets</option>
-						<option value="4">Name &amp; Number</option>
-						<option value="2">2" Name or 8" Number</option>
-						<option value="1.4">6" Number</option>
-						<option value="0.8">4" Number</option>
-						<option value="0.6">1" Name</option>
-						<option value="1.2">Team Name (3 x 12")</option>
-						<option value="7.8">Name &amp; Number (2-color)</option>
-						<option value="3.4">2" Name (2-color)</option>
-						<option value="4.4">8" Number (2-color)</option>
-						<option value="3.2">6" Number (2-color)</option>
-						<option value="2.0">4" Number (2-color)</option>
-					</select><!--
-					--><input id="height1" class='widthHA' placeholder="Height"><!--
-					--><input id="width1" class='widthHA' placeholder="Width"><!--
-					--><input id="decal1" class='widthHA' placeholder="Decal">
+      <h1 class="rightSize">Price Information</h1>
 
-					<select id="heatPresets2" class="leftSelect widthOne">
-						<option value="0" selected="selected">2nd App. Presets</option>
-						<option value="4">Name &amp; Number</option>
-						<option value="2">2" Name or 8" Number</option>
-						<option value="1.4">6" Number</option>
-						<option value="0.8">4" Number</option>
-						<option value="0.6">1" Name</option>
-						<option value="1.2">Team Name (3 x 12")</option>
-						<option value="7.8">Name &amp; Number (2-color)</option>
-						<option value="3.4">2" Name (2-color)</option>
-						<option value="4.4">8" Number (2-color)</option>
-						<option value="3.2">6" Number (2-color)</option>
-						<option value="2.0">4" Number (2-color)</option>
-					</select><!--
-					--><input id="height2" class='widthHA' placeholder="Height"><!--
-					--><input id="width2" class='widthHA' placeholder="Width"><!--
-					--><input id="decal2" class='widthHA' placeholder="Decal">
+      <div class="row rightSize">
+        <hr />
+        <p id="qty1" class="leftP">6 or more</p>
+        <p class="rightP">$<span id="cost1">0.00</span></p>
+        <select id="adj1" class="adjust">
+          <option value="-0.40">- 0.40</option>
+          <option value="-0.30">- 0.30</option>
+          <option value="-0.20">- 0.20</option>
+          <option value="-0.10">- 0.10</option>
+          <option value="0" selected="selected"></option>
+          <option value="0.10">+ 0.10</option>
+          <option value="0.20">+ 0.20</option>
+          <option value="0.30">+ 0.30</option>
+          <option value="0.40">+ 0.40</option>
+        </select>
 
-				</div>
+        <hr />
+        <p id="qty2" class="leftP">12 or more</p>
+        <p class="rightP">$<span id="cost2">0.00</span></p>
+        <select id="adj2" class="adjust">
+          <option value="-0.40">- 0.40</option>
+          <option value="-0.30">- 0.30</option>
+          <option value="-0.20">- 0.20</option>
+          <option value="-0.10">- 0.10</option>
+          <option value="0" selected="selected"></option>
+          <option value="0.10">+ 0.10</option>
+          <option value="0.20">+ 0.20</option>
+          <option value="0.30">+ 0.30</option>
+          <option value="0.40">+ 0.40</option>
+        </select>
 
-			</div>
+        <hr />
+        <p id="qty3" class="leftP">18 or more</p>
+        <p class="rightP">$<span id="cost3">0.00</span></p>
+        <select id="adj3" class="adjust">
+          <option value="-0.40">- 0.40</option>
+          <option value="-0.30">- 0.30</option>
+          <option value="-0.20">- 0.20</option>
+          <option value="-0.10">- 0.10</option>
+          <option value="0" selected="selected"></option>
+          <option value="0.10">+ 0.10</option>
+          <option value="0.20">+ 0.20</option>
+          <option value="0.30">+ 0.30</option>
+          <option value="0.40">+ 0.40</option>
+        </select>
 
-			<h1 class="rightSize">Price Information</h1>
+        <hr />
+        <p id="qty4" class="leftP">24 or more</p>
+        <p class="rightP">$<span id="cost4">0.00</span></p>
+        <select id="adj4" class="adjust">
+          <option value="-0.40">- 0.40</option>
+          <option value="-0.30">- 0.30</option>
+          <option value="-0.20">- 0.20</option>
+          <option value="-0.10">- 0.10</option>
+          <option value="0" selected="selected"></option>
+          <option value="0.10">+ 0.10</option>
+          <option value="0.20">+ 0.20</option>
+          <option value="0.30">+ 0.30</option>
+          <option value="0.40">+ 0.40</option>
+        </select>
 
-			<div class="row rightSize">
-				
-				<hr>
-				<p id="qty1" class="leftP">6 or more</p>
-				<p class="rightP">$<span id="cost1">0.00</span></p>
-				<select id="adj1" class="adjust">
-					<option value="-0.40">- 0.40</option>
-					<option value="-0.30">- 0.30</option>
-					<option value="-0.20">- 0.20</option>
-					<option value="-0.10">- 0.10</option>
-					<option value="0" selected="selected"></option>
-					<option value="0.10">+ 0.10</option>
-					<option value="0.20">+ 0.20</option>
-					<option value="0.30">+ 0.30</option>
-					<option value="0.40">+ 0.40</option>
-				</select>
+        <hr />
+        <p id="qty5" class="leftP">36 or more</p>
+        <p class="rightP">$<span id="cost5">0.00</span></p>
+        <select id="adj5" class="adjust">
+          <option value="-0.40">- 0.40</option>
+          <option value="-0.30">- 0.30</option>
+          <option value="-0.20">- 0.20</option>
+          <option value="-0.10">- 0.10</option>
+          <option value="0" selected="selected"></option>
+          <option value="0.10">+ 0.10</option>
+          <option value="0.20">+ 0.20</option>
+          <option value="0.30">+ 0.30</option>
+          <option value="0.40">+ 0.40</option>
+        </select>
 
-				<hr>
-				<p id="qty2" class="leftP">12 or more</p>
-				<p class="rightP">$<span id="cost2">0.00</span></p>
-				<select id="adj2" class="adjust">
-					<option value="-0.40">- 0.40</option>
-					<option value="-0.30">- 0.30</option>
-					<option value="-0.20">- 0.20</option>
-					<option value="-0.10">- 0.10</option>
-					<option value="0" selected="selected"></option>
-					<option value="0.10">+ 0.10</option>
-					<option value="0.20">+ 0.20</option>
-					<option value="0.30">+ 0.30</option>
-					<option value="0.40">+ 0.40</option>
-				</select>
+        <hr />
+        <p id="qty6" class="leftP">48 or more</p>
+        <p class="rightP">$<span id="cost6">0.00</span></p>
+        <select id="adj6" class="adjust">
+          <option value="-0.40">- 0.40</option>
+          <option value="-0.30">- 0.30</option>
+          <option value="-0.20">- 0.20</option>
+          <option value="-0.10">- 0.10</option>
+          <option value="0" selected="selected"></option>
+          <option value="0.10">+ 0.10</option>
+          <option value="0.20">+ 0.20</option>
+          <option value="0.30">+ 0.30</option>
+          <option value="0.40">+ 0.40</option>
+        </select>
 
-				<hr>
-				<p id="qty3" class="leftP">18 or more</p>
-				<p class="rightP">$<span id="cost3">0.00</span></p>
-				<select id="adj3" class="adjust">
-					<option value="-0.40">- 0.40</option>
-					<option value="-0.30">- 0.30</option>
-					<option value="-0.20">- 0.20</option>
-					<option value="-0.10">- 0.10</option>
-					<option value="0" selected="selected"></option>
-					<option value="0.10">+ 0.10</option>
-					<option value="0.20">+ 0.20</option>
-					<option value="0.30">+ 0.30</option>
-					<option value="0.40">+ 0.40</option>
-				</select>
+        <hr />
+        <p class="leftP">Total Cost w/tax <span class="small">(for lowest qty.)</span></p>
+        <p class="rightP">$<span id="total">0.00</span></p>
 
-				<hr>
-				<p id="qty4" class="leftP">24 or more</p>
-				<p class="rightP">$<span id="cost4">0.00</span></p>
-				<select id="adj4" class="adjust">
-					<option value="-0.40">- 0.40</option>
-					<option value="-0.30">- 0.30</option>
-					<option value="-0.20">- 0.20</option>
-					<option value="-0.10">- 0.10</option>
-					<option value="0" selected="selected"></option>
-					<option value="0.10">+ 0.10</option>
-					<option value="0.20">+ 0.20</option>
-					<option value="0.30">+ 0.30</option>
-					<option value="0.40">+ 0.40</option>
-				</select>
+        <hr />
+        <p class="leftP">Est. Print Time <span class="small">(for lowest qty.)</span></p>
+        <p class="rightP"><span id="time">0:00</span></p>
 
-				<hr>
-				<p id="qty5" class="leftP">36 or more</p>
-				<p class="rightP">$<span id="cost5">0.00</span></p>
-				<select id="adj5" class="adjust">
-					<option value="-0.40">- 0.40</option>
-					<option value="-0.30">- 0.30</option>
-					<option value="-0.20">- 0.20</option>
-					<option value="-0.10">- 0.10</option>
-					<option value="0" selected="selected"></option>
-					<option value="0.10">+ 0.10</option>
-					<option value="0.20">+ 0.20</option>
-					<option value="0.30">+ 0.30</option>
-					<option value="0.40">+ 0.40</option>
-				</select>
+        <hr />
+        <p class="leftP">Digitize Fee</p>
+        <p class="rightP">$<span id="costDig">0</span>.00</p>
 
-				<hr>
-				<p id="qty6" class="leftP">48 or more</p>
-				<p class="rightP">$<span id="cost6">0.00</span></p>
-				<select id="adj6" class="adjust">
-					<option value="-0.40">- 0.40</option>
-					<option value="-0.30">- 0.30</option>
-					<option value="-0.20">- 0.20</option>
-					<option value="-0.10">- 0.10</option>
-					<option value="0" selected="selected"></option>
-					<option value="0.10">+ 0.10</option>
-					<option value="0.20">+ 0.20</option>
-					<option value="0.30">+ 0.30</option>
-					<option value="0.40">+ 0.40</option>
-				</select>
+        <hr />
 
-				<hr>
-				<p class="leftP">Total Cost w/tax <span class="small">(for lowest qty.)</span></p>
-				<p class="rightP">$<span id="total">0.00</span></p>
+        <a class="help" href="help.html">Need help? Click here.</a>
 
-				<hr>
-				<p class="leftP">Est. Print Time <span class="small">(for lowest qty.)</span></p>
-				<p class="rightP"><span id="time">0:00</span></p>
+        <button id="submit">Calculate</button>
+      </div>
+    </div>
 
-				<hr>
-				<p class="leftP">Digitize Fee</p>
-				<p class="rightP">$<span id="costDig">0</span>.00</p>
-
-				<hr>
-
-				<a class="help" href="help.html">Need help? Click here.</a>
-
-				<button id="submit">Calculate</button>
-
-			</div>
-
-		</div>
-
-		<script src="script.js"></script>
-		
-	</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
