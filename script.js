@@ -3,26 +3,61 @@
 const data = {};
 const quotes = [];
 
+// cost for single silkscreen, starting at 1 item, then 3 or more
+
+const silkscreenCost = [12, 6, 2, 1.5, 1, 0.6, 0.4, 0.3, 0.2, 0.16, 0.125, 0.1, 0.07]; // no silkscreen fee for 200+
+
+// array of price break quantities
+
+const breaks = [1, 3, 6, 9, 12, 18, 24, 36, 48, 60, 80, 100, 150, 200, 300, 400, 600, 800];
+
+// object for adjustment values
+
+const adjustments = {
+  1: {},
+  3: {},
+  6: {},
+  9: {},
+  12: {},
+  18: {},
+  24: {},
+  36: {},
+  48: {},
+  60: {},
+  80: {},
+  100: {},
+  150: {},
+  200: {},
+  300: {},
+  400: {},
+  600: {},
+  800: {}
+};
+
 // this chart contains the pricing info for the first imprint
 // to edit, enter the values for each quantity starting with a 0,
 // then 1-color, 2-color, etc.
 
-let firstImprintChart = {
-  1: [0, 11, 14, 17, 20, 23, 26], // 1 or more
-  3: [0, 9, 11.5, 14, 16.5, 19, 21.5], // 3 or more
-  6: [0, 7, 9, 11, 13, 15, 17], // 6 or more
-  9: [0, 6, 7.8, 9.6, 11.4, 13.2, 15], // 9 or more
-  12: [0, 5, 6.4, 7.8, 9.2, 10.6, 12], // 12 or more
-  18: [0, 4.5, 5.7, 6.9, 8.1, 9.3, 10.5], // 18 or more
-  24: [0, 4, 5.1, 6.2, 7.3, 8.4, 9.5], // 24 or more
-  36: [0, 3.6, 4.6, 5.6, 6.6, 7.6, 8.6], // 36 or more
-  48: [0, 3.3, 4.2, 5.1, 6, 6.9, 7.8], // 48 or more
-  60: [0, 3, 3.8, 4.6, 5.4, 6.2, 7], // 60 or more
-  80: [0, 2.75, 3.5, 4.25, 5, 5.75, 6.5], // 80 or more
-  100: [0, 2.5, 3.2, 3.9, 4.6, 5.3, 6], // 100 or more
-  150: [0, 2.2, 2.8, 3.4, 4, 4.6, 5.2], // 150 or more
-  200: [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75] // 200 or more
-};
+const firstImprintChart = [
+  [0, 11, 14, 17, 20, 23, 26], // 1 or more
+  [0, 9, 11.5, 14, 16.5, 19, 21.5], // 3 or more
+  [0, 7, 9, 11, 13, 15, 17], // 6 or more
+  [0, 6, 7.8, 9.6, 11.4, 13.2, 15], // 9 or more
+  [0, 5, 6.4, 7.8, 9.2, 10.6, 12], // 12 or more
+  [0, 4.5, 5.7, 6.9, 8.1, 9.3, 10.5], // 18 or more
+  [0, 4, 5.1, 6.2, 7.3, 8.4, 9.5], // 24 or more
+  [0, 3.6, 4.6, 5.6, 6.6, 7.6, 8.6], // 36 or more
+  [0, 3.3, 4.2, 5.1, 6, 6.9, 7.8], // 48 or more
+  [0, 3, 3.8, 4.6, 5.4, 6.2, 7], // 60 or more
+  [0, 2.75, 3.5, 4.25, 5, 5.75, 6.5], // 80 or more
+  [0, 2.5, 3.2, 3.9, 4.6, 5.3, 6], // 100 or more
+  [0, 2.2, 2.8, 3.4, 4, 4.6, 5.2], // 150 or more
+  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 200 or more
+  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 300 or more
+  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 400 or more
+  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 600 or more
+  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75] // 800 or more
+];
 
 // gets value from HTML element
 
@@ -36,6 +71,67 @@ function setValue(id, value) {
   document.getElementById(id).innerHTML = value;
 }
 
+// puts final cost into HTML element
+
+function setFinalCost(id, index, value) {
+  if (index > 17) {
+    document.getElementById(id).innerHTML = '';
+  } else {
+    // value += adjustments[data.quantity];
+    document.getElementById(id).innerHTML = value.toFixed(2);
+  }
+}
+
+// figures out what the quantity array index should be
+
+function setIndex() {
+  let number = 0;
+
+  if (data.exactQty) {
+    number = data.exactQty;
+  } else {
+    number = data.quantity;
+  }
+
+  if (number < 3) {
+    return 0;
+  } else if (number >= 3 && number < 6) {
+    return 1;
+  } else if (number >= 6 && number < 9) {
+    return 2;
+  } else if (number >= 9 && number < 12) {
+    return 3;
+  } else if (number >= 12 && number < 18) {
+    return 4;
+  } else if (number >= 18 && number < 24) {
+    return 5;
+  } else if (number >= 24 && number < 36) {
+    return 6;
+  } else if (number >= 36 && number < 48) {
+    return 7;
+  } else if (number >= 48 && number < 60) {
+    return 8;
+  } else if (number >= 60 && number < 80) {
+    return 9;
+  } else if (number >= 80 && number < 100) {
+    return 10;
+  } else if (number >= 100 && number < 150) {
+    return 11;
+  } else if (number >= 150 && number < 200) {
+    return 12;
+  } else if (number >= 200 && number < 300) {
+    return 13;
+  } else if (number >= 300 && number < 400) {
+    return 14;
+  } else if (number >= 400 && number < 600) {
+    return 15;
+  } else if (number >= 600 && number < 800) {
+    return 16;
+  } else if (number >= 800) {
+    return 17;
+  }
+}
+
 // Collects all the form data
 
 function getAllData() {
@@ -43,10 +139,17 @@ function getAllData() {
   data.exGarment = getValue('exactGar');
   data.addMarkup = document.getElementById('markup').checked;
   data.quantity = getValue('quantity');
-  data.exQty = getValue('exactQty');
+  data.exactQty = getValue('exactQty');
+  data.qtyIndex = setIndex();
 
-  data.silkscreens = getValue('silkscreens');
-  data.exactScr = getValue('exactScr');
+  if (data.exactQty) {
+    data.quantity = breaks[data.qtyIndex];
+    document.getElementById('quantity').selectedIndex = data.qtyIndex;
+  }
+
+  data.addition = getValue('additional');
+
+  data.silkscreens = getValue('exactScr') || getValue('silkscreens');
   data.imprints = [];
   data.imprints.push(getValue('colors1'));
   data.imprints.push(getValue('colors2'));
@@ -69,22 +172,29 @@ function getAllData() {
   data.heatApp.width2 = getValue('width2');
   data.heatApp.decal2 = getValue('decal2');
 
-  data.adjust = [];
-  data.adjust.push(getValue('adj1'));
-  data.adjust.push(getValue('adj2'));
-  data.adjust.push(getValue('adj3'));
-  data.adjust.push(getValue('adj4'));
-  data.adjust.push(getValue('adj5'));
-  data.adjust.push(getValue('adj6'));
+  // data.adjust = [];
+  // data.adjust.push(getValue('adj1'));
+  // data.adjust.push(getValue('adj2'));
+  // data.adjust.push(getValue('adj3'));
+  // data.adjust.push(getValue('adj4'));
+  // data.adjust.push(getValue('adj5'));
+  // data.adjust.push(getValue('adj6'));
 }
 
 // calculates the price for a particular quantity and row
 
-function calcCost(qty, row) {
-  let total = data.garment;
+function calcCost(index) {
+  let total = data.exGarment || data.garment;
+
+  total += data.addition;
+  if (index <= 12) {
+    total += data.silkscreens * silkscreenCost[index];
+  }
 
   return total;
 }
+
+// TODO: create a function that calculates all the prices and only displays the six that can be shown.
 
 // sets up onclick events for price levels
 
@@ -101,6 +211,23 @@ function calcCost(qty, row) {
 
 function calculate() {
   getAllData();
+
+  setFinalCost('cost1', data.qtyIndex, calcCost(data.qtyIndex));
+  setFinalCost('cost2', data.qtyIndex + 1, calcCost(data.qtyIndex + 1));
+  setFinalCost('cost3', data.qtyIndex + 2, calcCost(data.qtyIndex + 2));
+  setFinalCost('cost4', data.qtyIndex + 3, calcCost(data.qtyIndex + 3));
+  setFinalCost('cost5', data.qtyIndex + 4, calcCost(data.qtyIndex + 4));
+  setFinalCost('cost6', data.qtyIndex + 5, calcCost(data.qtyIndex + 5));
+
+  setValue('qty1', `${breaks[data.qtyIndex]} or more`);
+  setValue('qty2', `${breaks[data.qtyIndex + 1]} or more`);
+  setValue('qty3', `${breaks[data.qtyIndex + 2]} or more`);
+  setValue('qty4', `${breaks[data.qtyIndex + 3]} or more`);
+  setValue('qty5', `${breaks[data.qtyIndex + 4]} or more`);
+  setValue('qty6', `${breaks[data.qtyIndex + 5]} or more`);
+
+  // TODO: change the adjustments to match the 6 values
+
   console.log(data);
 }
 
@@ -120,3 +247,16 @@ document.addEventListener('keypress', function(e) {
     location.reload();
   }
 });
+
+// sets up change handler for adjustment selects
+
+function adjustHandler(event) {
+  adjustments[event.target.name].value = Number(event.target.value);
+  adjustments[event.target.name].index = Number(event.target.selectedIndex);
+}
+
+const adjList = document.querySelectorAll('.adjust');
+
+for (let item of adjList) {
+  item.addEventListener('change', adjustHandler);
+}
