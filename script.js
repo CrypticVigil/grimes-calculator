@@ -14,24 +14,24 @@ const breaks = [1, 3, 6, 9, 12, 18, 24, 36, 48, 60, 80, 100, 150, 200, 300, 400,
 // object for adjustment values
 
 const adjustments = {
-  1: {},
-  3: {},
-  6: {},
-  9: {},
-  12: {},
-  18: {},
-  24: {},
-  36: {},
-  48: {},
-  60: {},
-  80: {},
-  100: {},
-  150: {},
-  200: {},
-  300: {},
-  400: {},
-  600: {},
-  800: {}
+  1: { index: 4 },
+  3: { index: 4 },
+  6: { index: 4 },
+  9: { index: 4 },
+  12: { index: 4 },
+  18: { index: 4 },
+  24: { index: 4 },
+  36: { index: 4 },
+  48: { index: 4 },
+  60: { index: 4 },
+  80: { index: 4 },
+  100: { index: 4 },
+  150: { index: 4 },
+  200: { index: 4 },
+  300: { index: 4 },
+  400: { index: 4 },
+  600: { index: 4 },
+  800: { index: 4 }
 };
 
 // this chart contains the pricing info for the first imprint
@@ -59,6 +59,29 @@ const firstImprintChart = [
   [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75] // 800 or more
 ];
 
+// this chart contains the pricing info for the second imprint
+
+let secondImprintChart = [
+  [0, 8, 11, 14, 17, 20, 23], // 1 or more
+  [0, 6.5, 9, 11.5, 14, 16.5, 19], // 3 or more
+  [0, 5, 7, 9, 11, 13, 15], // 6 or more
+  [0, 4, 5.6, 7.2, 8.8, 10.4, 12], // 9 or more
+  [0, 3, 4.2, 5.4, 6.6, 7.8, 9], // 12 or more
+  [0, 2.7, 3.8, 4.9, 6, 7.1, 8.2], // 18 or more
+  [0, 2.4, 3.4, 4.4, 5.4, 6.4, 7.4], // 24 or more
+  [0, 2.2, 3.1, 4, 4.9, 5.8, 6.7], // 36 or more
+  [0, 2, 2.8, 3.6, 4.4, 5.2, 6], // 48 or more
+  [0, 1.8, 2.5, 3.2, 3.9, 4.6, 5.3], // 60 or more
+  [0, 1.65, 2.3, 2.95, 3.6, 4.25, 4.9], // 80 or more
+  [0, 1.5, 2.1, 2.7, 3.3, 3.9, 4.5], // 100 or more
+  [0, 1.3, 1.85, 2.4, 2.95, 3.5, 4.05], // 150 or more
+  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 200 or more
+  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 300 or more
+  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 400 or more
+  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 600 or more
+  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7] // 800 or more
+];
+
 // gets value from HTML element
 
 function getValue(id) {
@@ -73,12 +96,15 @@ function setValue(id, value) {
 
 // puts final cost into HTML element
 
-function setFinalCost(id, index, value) {
+function setFinalCost(num, index, value) {
   if (index > 17) {
-    document.getElementById(id).innerHTML = '';
+    document.getElementById(`cost${num}`).innerHTML = '';
+    document.getElementById(`qty${num}`).innerHTML = '';
   } else {
     // value += adjustments[data.quantity];
-    document.getElementById(id).innerHTML = value.toFixed(2);
+    value += adjustments[breaks[index]].value ? adjustments[breaks[index]].value : 0;
+    document.getElementById(`cost${num}`).innerHTML = value.toFixed(2);
+    document.getElementById(`qty${num}`).innerHTML = `${breaks[index]} or more`;
   }
 }
 
@@ -155,6 +181,7 @@ function getAllData() {
   data.imprints.push(getValue('colors2'));
   data.imprints.push(getValue('colors3'));
   data.imprints.push(getValue('colors4'));
+  data.imprints.sort((a, b) => b - a);
 
   data.embroidery = [];
   data.embroidery.push(getValue('emb1'));
@@ -171,14 +198,6 @@ function getAllData() {
   data.heatApp.height2 = getValue('height2');
   data.heatApp.width2 = getValue('width2');
   data.heatApp.decal2 = getValue('decal2');
-
-  // data.adjust = [];
-  // data.adjust.push(getValue('adj1'));
-  // data.adjust.push(getValue('adj2'));
-  // data.adjust.push(getValue('adj3'));
-  // data.adjust.push(getValue('adj4'));
-  // data.adjust.push(getValue('adj5'));
-  // data.adjust.push(getValue('adj6'));
 }
 
 // calculates the price for a particular quantity and row
@@ -191,10 +210,18 @@ function calcCost(index) {
     total += data.silkscreens * silkscreenCost[index];
   }
 
+  let loopIndex = 0;
+  for (let item of data.imprints) {
+    total += loopIndex === 0 ? firstImprintChart[index][item] : secondImprintChart[index][item];
+    loopIndex++;
+  }
+
+  // TODO: add embroidery cost
+  // TODO: add heat-application cost
+  // TODO: make sure heat-application checks width vs height and if we can fit several on the roll
+
   return total;
 }
-
-// TODO: create a function that calculates all the prices and only displays the six that can be shown.
 
 // sets up onclick events for price levels
 
@@ -212,23 +239,19 @@ function calcCost(index) {
 function calculate() {
   getAllData();
 
-  setFinalCost('cost1', data.qtyIndex, calcCost(data.qtyIndex));
-  setFinalCost('cost2', data.qtyIndex + 1, calcCost(data.qtyIndex + 1));
-  setFinalCost('cost3', data.qtyIndex + 2, calcCost(data.qtyIndex + 2));
-  setFinalCost('cost4', data.qtyIndex + 3, calcCost(data.qtyIndex + 3));
-  setFinalCost('cost5', data.qtyIndex + 4, calcCost(data.qtyIndex + 4));
-  setFinalCost('cost6', data.qtyIndex + 5, calcCost(data.qtyIndex + 5));
+  setFinalCost('1', data.qtyIndex, calcCost(data.qtyIndex));
+  setFinalCost('2', data.qtyIndex + 1, calcCost(data.qtyIndex + 1));
+  setFinalCost('3', data.qtyIndex + 2, calcCost(data.qtyIndex + 2));
+  setFinalCost('4', data.qtyIndex + 3, calcCost(data.qtyIndex + 3));
+  setFinalCost('5', data.qtyIndex + 4, calcCost(data.qtyIndex + 4));
+  setFinalCost('6', data.qtyIndex + 5, calcCost(data.qtyIndex + 5));
 
-  setValue('qty1', `${breaks[data.qtyIndex]} or more`);
-  setValue('qty2', `${breaks[data.qtyIndex + 1]} or more`);
-  setValue('qty3', `${breaks[data.qtyIndex + 2]} or more`);
-  setValue('qty4', `${breaks[data.qtyIndex + 3]} or more`);
-  setValue('qty5', `${breaks[data.qtyIndex + 4]} or more`);
-  setValue('qty6', `${breaks[data.qtyIndex + 5]} or more`);
-
-  // TODO: change the adjustments to match the 6 values
-
-  console.log(data);
+  document.getElementById('adj1').selectedIndex = adjustments[breaks[data.qtyIndex]].index;
+  document.getElementById('adj2').selectedIndex = data.qtyIndex < 17 ? adjustments[breaks[data.qtyIndex + 1]].index : 4;
+  document.getElementById('adj3').selectedIndex = data.qtyIndex < 16 ? adjustments[breaks[data.qtyIndex + 2]].index : 4;
+  document.getElementById('adj4').selectedIndex = data.qtyIndex < 15 ? adjustments[breaks[data.qtyIndex + 3]].index : 4;
+  document.getElementById('adj5').selectedIndex = data.qtyIndex < 14 ? adjustments[breaks[data.qtyIndex + 4]].index : 4;
+  document.getElementById('adj6').selectedIndex = data.qtyIndex < 13 ? adjustments[breaks[data.qtyIndex + 5]].index : 4;
 }
 
 // sets up click handler on calculate button
