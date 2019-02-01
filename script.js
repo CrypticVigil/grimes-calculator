@@ -1,7 +1,6 @@
 // sets up const variables to store values later
 
 const data = {};
-const quotes = [];
 
 // cost for single silkscreen, starting at 1 item, then 3 or more
 
@@ -103,7 +102,7 @@ function setFinalCost(num, index, value) {
   } else {
     // value += adjustments[data.quantity];
     value += adjustments[breaks[index]].value ? adjustments[breaks[index]].value : 0;
-    document.getElementById(`cost${num}`).innerHTML = value.toFixed(2);
+    document.getElementById(`cost${num}`).innerHTML = roundOff(value);
     document.getElementById(`qty${num}`).innerHTML = `${breaks[index]} or more`;
   }
 }
@@ -184,10 +183,10 @@ function getAllData() {
   data.imprints.sort((a, b) => b - a);
 
   data.embroidery = [];
-  data.embroidery.push(getValue('emb1'));
-  data.embroidery.push(getValue('emb2'));
-  data.embroidery.push(getValue('emb3'));
-  data.embroidery.push(getValue('emb4'));
+  data.embroidery.push(setStitches(getValue('emb1')));
+  data.embroidery.push(setStitches(getValue('emb2')));
+  data.embroidery.push(setStitches(getValue('emb3')));
+  data.embroidery.push(setStitches(getValue('emb4')));
 
   data.heatApp = {};
   data.heatApp.preset1 = getValue('heatPresets1');
@@ -200,27 +199,104 @@ function getAllData() {
   data.heatApp.decal2 = getValue('decal2');
 }
 
-// calculates the price for a particular quantity and row
+// rounds a decimal up or down
 
-function calcCost(index) {
-  let total = data.exGarment || data.garment;
+function roundOff(value) {
+  value = (value * 100).toFixed();
+  const lastDigit = value.toString().slice(-1);
+  if (lastDigit >= 4) {
+    value = Math.ceil(value / 10) * 10;
+  } else {
+    value = Math.floor(value / 10) * 10;
+  }
+  value = value / 100;
+  return value.toFixed(2);
+}
 
-  total += data.addition;
-  if (index <= 12) {
-    total += data.silkscreens * silkscreenCost[index];
+// chart of embroidery prices
+
+const embChart = {
+  6: [2, 0.7, 0.5],
+  12: [1.8, 0.6, 0.45],
+  24: [1.7, 0.55, 0.45],
+  48: [1.6, 0.5, 0.4],
+  100: [1.5, 0.45, 0.4],
+  200: [1.4, 0.4, 0.4]
+};
+
+function totalEmb(qty) {
+  const amount = breaks[qty];
+  let quantityEmb;
+
+  if (amount < 12 && amount >= 6) {
+    quantityEmb = 6;
+  } else if (amount < 24 && amount >= 12) {
+    quantityEmb = 12;
+  } else if (amount < 48 && amount >= 24) {
+    quantityEmb = 24;
+  } else if (amount < 100 && amount >= 48) {
+    quantityEmb = 48;
+  } else if (amount < 200 && amount >= 100) {
+    quantityEmb = 100;
+  } else if (amount >= 200) {
+    quantityEmb = 200;
+  } else {
+    quantityEmb = amount;
   }
 
-  let loopIndex = 0;
-  for (let item of data.imprints) {
-    total += loopIndex === 0 ? firstImprintChart[index][item] : secondImprintChart[index][item];
-    loopIndex++;
+  let totalEmbCost = 0;
+
+  for (let item of data.embroidery) {
+    if (item) {
+      totalEmbCost += calcEmb(item, quantityEmb);
+    }
   }
 
-  // TODO: add embroidery cost
-  // TODO: add heat-application cost
-  // TODO: make sure heat-application checks width vs height and if we can fit several on the roll
+  return totalEmbCost;
+}
 
-  return total;
+// calculate embroidery cost using stitch count & quantity
+
+function calcEmb(stitches, amt) {
+  let cost, chartRow;
+
+  if (amt == 1) {
+    chartRow = embChart[6];
+    cost = 3;
+  } else if (amt == 3) {
+    chartRow = embChart[6];
+    cost = 1;
+  } else {
+    chartRow = embChart[amt];
+    cost = 0;
+  }
+
+  if (stitches <= 10) {
+    cost += chartRow[0];
+    cost += chartRow[1] * (stitches - 2);
+  } else {
+    cost += chartRow[0];
+    cost += chartRow[1] * 8;
+    cost += chartRow[2] * (stitches - 10);
+  }
+
+  return cost;
+}
+
+// rounds up stitches to nearest thousand
+
+function setStitches(stitches) {
+  if (stitches > 250) {
+    stitches = Math.ceil(stitches / 1000);
+  } else {
+    stitches = Math.ceil(stitches);
+  }
+
+  if (stitches < 2 && stitches !== 0) {
+    stitches = 2;
+  }
+
+  return stitches;
 }
 
 // sets up onclick events for price levels
@@ -252,6 +328,43 @@ function calculate() {
   document.getElementById('adj4').selectedIndex = data.qtyIndex < 15 ? adjustments[breaks[data.qtyIndex + 3]].index : 4;
   document.getElementById('adj5').selectedIndex = data.qtyIndex < 14 ? adjustments[breaks[data.qtyIndex + 4]].index : 4;
   document.getElementById('adj6').selectedIndex = data.qtyIndex < 13 ? adjustments[breaks[data.qtyIndex + 5]].index : 4;
+
+  document.getElementById('adj1').setAttribute('name', breaks[data.qtyIndex]);
+  document.getElementById('adj2').setAttribute('name', breaks[data.qtyIndex + 1]);
+  document.getElementById('adj3').setAttribute('name', breaks[data.qtyIndex + 2]);
+  document.getElementById('adj4').setAttribute('name', breaks[data.qtyIndex + 3]);
+  document.getElementById('adj5').setAttribute('name', breaks[data.qtyIndex + 4]);
+  document.getElementById('adj6').setAttribute('name', breaks[data.qtyIndex + 5]);
+}
+
+// calculates the price for a particular quantity and row
+
+function calcCost(index) {
+  if (index > 17) {
+    return 0;
+  }
+
+  let total = data.exGarment || data.garment;
+
+  total += data.addition;
+  if (index <= 12) {
+    total += data.silkscreens * silkscreenCost[index];
+  }
+
+  let loopIndex = 0;
+  for (let item of data.imprints) {
+    total += loopIndex === 0 ? firstImprintChart[index][item] : secondImprintChart[index][item];
+    loopIndex++;
+  }
+
+  if (data.embroidery[0] || data.embroidery[1] || data.embroidery[2] || data.embroidery[3]) {
+    total += totalEmb(index);
+  }
+
+  // TODO: add heat-application cost
+  // TODO: make sure heat-application checks width vs height and if we can fit several on the roll
+
+  return total;
 }
 
 // sets up click handler on calculate button
