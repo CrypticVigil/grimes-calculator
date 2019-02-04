@@ -82,8 +82,7 @@ const adjustments = {
 const data = {};
 
 function getAllData() {
-  data.garment = getValue('garment');
-  data.exGarment = getValue('exactGar');
+  data.garment = garmentCost();
   data.addMarkup = document.getElementById('markup').checked;
   data.quantity = getValue('quantity');
   data.exactQty = getValue('exactQty');
@@ -111,14 +110,26 @@ function getAllData() {
   data.embroidery.push(setStitches(getValue('emb4')));
 
   data.heatApp = {};
+
+  data.heatApp.app1 = false;
   data.heatApp.preset1 = getValue('heatPresets1');
   data.heatApp.height1 = getValue('height1');
   data.heatApp.width1 = getValue('width1');
   data.heatApp.decal1 = getValue('decal1');
+
+  data.heatApp.app2 = false;
   data.heatApp.preset2 = getValue('heatPresets2');
   data.heatApp.height2 = getValue('height2');
   data.heatApp.width2 = getValue('width2');
   data.heatApp.decal2 = getValue('decal2');
+
+  if (data.heatApp.preset1 || data.heatApp.height1 || data.heatApp.decal1) {
+    data.heatApp.app1 = true;
+  }
+  if (data.heatApp.preset2 || data.heatApp.height2 || data.heatApp.decal2) {
+    data.heatApp.app2 = true;
+  }
+  console.log(data);
 }
 
 // figures out what the quantity array index should be
@@ -183,6 +194,54 @@ function roundOff(value) {
   }
   value = value / 100;
   return value.toFixed(2);
+}
+
+// checks if there's a value in the garment cost input
+// if not, then it uses the value from the garment style select
+
+function garmentCost() {
+  let cost = 0;
+  if (getValue('exactGar') && document.getElementById('markup').checked) {
+    cost = calcMarkup(getValue('exactGar'));
+  } else if (getValue('exactGar') && !document.getElementById('markup').checked) {
+    cost = getValue('exactGar');
+  } else {
+    cost = getValue('garment');
+  }
+  return cost;
+}
+
+// takes a blank item cost and returns the price with markup
+
+function calcMarkup(blank) {
+  function markup(num, markup) {
+    num = num * markup;
+    num = (num * 100).toFixed();
+    const lastDigit = num.slice(-1);
+    num = Number(num);
+    if (lastDigit >= 3) {
+      num = Math.ceil(num / 10) * 10;
+    } else {
+      num = Math.floor(num / 10) * 10;
+    }
+    return num / 100;
+  }
+
+  if (blank < 5) {
+    return markup(blank, 1.5);
+  } else if (blank < 10 && blank >= 5) {
+    return markup(blank, 1.45);
+  } else if (blank < 20 && blank >= 10) {
+    return markup(blank, 1.4);
+  } else if (blank < 30 && blank >= 20) {
+    return markup(blank, 1.35);
+  } else if (blank < 50 && blank >= 30) {
+    return markup(blank, 1.3);
+  } else if (blank < 80 && blank >= 50) {
+    return markup(blank, 1.25);
+  } else {
+    return markup(blank, 1.2);
+  }
 }
 
 // chart of embroidery prices
@@ -271,6 +330,107 @@ function setStitches(stitches) {
   return stitches;
 }
 
+// calculate how many items can fit on the roll
+
+function checkBoth(height, width, qty) {
+  let lower, perRow, perRowHeight, priceWidth, priceHeight;
+
+  if (qty < 6) {
+    priceHeight = height * 0.5;
+    priceWidth = width * 0.5;
+
+    if (width > 19) {
+      document.getElementById('width').value = '';
+      document.getElementById('width').placeholder = '19" or less';
+    }
+
+    if (priceHeight < priceWidth) {
+      lower = priceHeight;
+    } else {
+      lower = priceWidth;
+    }
+  } else {
+    if (width > 19) {
+      document.getElementById('width').value = '';
+      document.getElementById('width').placeholder = '19" or less';
+    } else if (width <= 19 && width * 2 > 19) {
+      perRow = 1;
+    } else if (width * 2 <= 19 && width * 3 > 19) {
+      perRow = 2;
+    } else if (width * 3 <= 19 && width * 4 > 18) {
+      perRow = 3;
+    } else if (width * 4 <= 18 && width * 5 > 17.5) {
+      perRow = 4;
+    } else if (width * 5 <= 17.5 && width * 6 > 17) {
+      perRow = 5;
+    } else if (width * 6 <= 17) {
+      perRow = 6;
+    }
+
+    if (height * 2 > 19) {
+      perRowHeight = 1;
+    } else if (height * 2 <= 19 && height * 3 > 19) {
+      perRowHeight = 2;
+    } else if (height * 3 <= 19 && height * 4 > 18) {
+      perRowHeight = 3;
+    } else if (height * 4 <= 18 && height * 5 > 17.5) {
+      perRowHeight = 4;
+    } else if (height * 5 <= 17.5 && height * 6 > 17) {
+      perRowHeight = 5;
+    } else if (height * 6 <= 17) {
+      perRowHeight = 6;
+    }
+
+    priceHeight = (height * 0.5) / perRow;
+    priceWidth = (width * 0.5) / perRowHeight;
+
+    if (priceHeight < priceWidth) {
+      lower = priceHeight;
+    } else {
+      lower = priceWidth;
+    }
+  }
+
+  return Number(lower.toFixed(2));
+}
+
+function appCost(inputQty) {
+  let application;
+
+  if (inputQty < 6) {
+    application = 3;
+  } else if (6 <= inputQty && inputQty < 12) {
+    application = 2.4;
+  } else if (12 <= inputQty && inputQty < 24) {
+    application = 2;
+  } else if (24 <= inputQty && inputQty < 48) {
+    application = 1.8;
+  } else if (48 <= inputQty && inputQty < 100) {
+    application = 1.6;
+  } else if (100 <= inputQty) {
+    application = 1.4;
+  }
+
+  return application;
+}
+
+// retrieve or calculate the cost for the applied decal
+
+function itemCost(qty, num) {
+  let itemCost;
+
+  if (getValue('decal' + num)) {
+    itemCost = getValue('decal' + num);
+  } else if (getValue('height' + num)) {
+    const width = getValue('width' + num) || 18;
+    const height = getValue('height' + num);
+    itemCost = checkBoth(height, width, qty);
+  } else {
+    itemCost = getValue('heatPresets' + num);
+  }
+  return itemCost;
+}
+
 // do this when the calculate button or enter key is pressed
 
 function calculate() {
@@ -307,7 +467,7 @@ function calcCost(index) {
     return 0;
   }
 
-  let total = data.exGarment || data.garment;
+  let total = data.garment;
 
   total += data.addition;
   if (index <= 12) {
@@ -322,6 +482,13 @@ function calcCost(index) {
 
   if (data.embroidery[0] || data.embroidery[1] || data.embroidery[2] || data.embroidery[3]) {
     total += totalEmb(index);
+  }
+
+  if (data.heatApp.app1 && data.heatApp.app2) {
+    total += itemCost(breaks[index], 1);
+  } else if (data.heatApp.app1) {
+    total += appCost(breaks[index]);
+    total += itemCost(breaks[index], 1);
   }
 
   // TODO: add heat-application cost
