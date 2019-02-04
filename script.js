@@ -485,14 +485,15 @@ function calcCost(index) {
   }
 
   if (data.heatApp.app1 && data.heatApp.app2) {
+    total += appCost(breaks[index] * 2) * 2;
     total += itemCost(breaks[index], 1);
+    total += itemCost(breaks[index], 2);
   } else if (data.heatApp.app1) {
     total += appCost(breaks[index]);
     total += itemCost(breaks[index], 1);
   }
 
-  // TODO: add heat-application cost
-  // TODO: make sure heat-application checks width vs height and if we can fit several on the roll
+  // TODO: add digitize fee and total cost
 
   return total;
 }
@@ -508,6 +509,9 @@ function setFinalCost(num, index, value) {
     value += adjustments[breaks[index]].value ? adjustments[breaks[index]].value : 0;
     document.getElementById(`cost${num}`).innerHTML = roundOff(value);
     document.getElementById(`qty${num}`).innerHTML = `${breaks[index]} or more`;
+    if (num === '1') {
+      calcTotal(roundOff(value));
+    }
   }
 }
 
@@ -533,6 +537,13 @@ function calcTime() {
   }
 
   setValue('time', `${hours}:${minutes}`);
+}
+
+// calculates the total cost with sales tax
+
+function calcTotal(value) {
+  const qty = data.exactQty ? data.exactQty : data.quantity;
+  setValue('total', (value * qty * 1.06).toFixed(2));
 }
 
 // gets value from HTML element
