@@ -1,7 +1,3 @@
-// sets up const variables to store values later
-
-const data = {};
-
 // cost for single silkscreen, starting at 1 item, then 3 or more
 
 const silkscreenCost = [12, 6, 2, 1.5, 1, 0.6, 0.4, 0.3, 0.2, 0.16, 0.125, 0.1, 0.07]; // no silkscreen fee for 200+
@@ -9,29 +5,6 @@ const silkscreenCost = [12, 6, 2, 1.5, 1, 0.6, 0.4, 0.3, 0.2, 0.16, 0.125, 0.1, 
 // array of price break quantities
 
 const breaks = [1, 3, 6, 9, 12, 18, 24, 36, 48, 60, 80, 100, 150, 200, 300, 400, 600, 800];
-
-// object for adjustment values
-
-const adjustments = {
-  1: { index: 4 },
-  3: { index: 4 },
-  6: { index: 4 },
-  9: { index: 4 },
-  12: { index: 4 },
-  18: { index: 4 },
-  24: { index: 4 },
-  36: { index: 4 },
-  48: { index: 4 },
-  60: { index: 4 },
-  80: { index: 4 },
-  100: { index: 4 },
-  150: { index: 4 },
-  200: { index: 4 },
-  300: { index: 4 },
-  400: { index: 4 },
-  600: { index: 4 },
-  800: { index: 4 }
-};
 
 // this chart contains the pricing info for the first imprint
 // to edit, enter the values for each quantity starting with a 0,
@@ -60,7 +33,7 @@ const firstImprintChart = [
 
 // this chart contains the pricing info for the second imprint
 
-let secondImprintChart = [
+const secondImprintChart = [
   [0, 8, 11, 14, 17, 20, 23], // 1 or more
   [0, 6.5, 9, 11.5, 14, 16.5, 19], // 3 or more
   [0, 5, 7, 9, 11, 13, 15], // 6 or more
@@ -81,30 +54,71 @@ let secondImprintChart = [
   [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7] // 800 or more
 ];
 
-// gets value from HTML element
+// object for adjustment values
 
-function getValue(id) {
-  return Number(document.getElementById(id).value);
-}
+const adjustments = {
+  1: { index: 4 },
+  3: { index: 4 },
+  6: { index: 4 },
+  9: { index: 4 },
+  12: { index: 4 },
+  18: { index: 4 },
+  24: { index: 4 },
+  36: { index: 4 },
+  48: { index: 4 },
+  60: { index: 4 },
+  80: { index: 4 },
+  100: { index: 4 },
+  150: { index: 4 },
+  200: { index: 4 },
+  300: { index: 4 },
+  400: { index: 4 },
+  600: { index: 4 },
+  800: { index: 4 }
+};
 
-// puts value into HTML element
+// Collects all the form data
 
-function setValue(id, value) {
-  document.getElementById(id).innerHTML = value;
-}
+const data = {};
 
-// puts final cost into HTML element
+function getAllData() {
+  data.garment = getValue('garment');
+  data.exGarment = getValue('exactGar');
+  data.addMarkup = document.getElementById('markup').checked;
+  data.quantity = getValue('quantity');
+  data.exactQty = getValue('exactQty');
+  data.qtyIndex = setIndex();
 
-function setFinalCost(num, index, value) {
-  if (index > 17) {
-    document.getElementById(`cost${num}`).innerHTML = '';
-    document.getElementById(`qty${num}`).innerHTML = '';
-  } else {
-    // value += adjustments[data.quantity];
-    value += adjustments[breaks[index]].value ? adjustments[breaks[index]].value : 0;
-    document.getElementById(`cost${num}`).innerHTML = roundOff(value);
-    document.getElementById(`qty${num}`).innerHTML = `${breaks[index]} or more`;
+  if (data.exactQty) {
+    data.quantity = breaks[data.qtyIndex];
+    document.getElementById('quantity').selectedIndex = data.qtyIndex;
   }
+
+  data.addition = getValue('additional');
+
+  data.silkscreens = getValue('exactScr') || getValue('silkscreens');
+  data.imprints = [];
+  data.imprints.push(getValue('colors1'));
+  data.imprints.push(getValue('colors2'));
+  data.imprints.push(getValue('colors3'));
+  data.imprints.push(getValue('colors4'));
+  data.imprints.sort((a, b) => b - a);
+
+  data.embroidery = [];
+  data.embroidery.push(setStitches(getValue('emb1')));
+  data.embroidery.push(setStitches(getValue('emb2')));
+  data.embroidery.push(setStitches(getValue('emb3')));
+  data.embroidery.push(setStitches(getValue('emb4')));
+
+  data.heatApp = {};
+  data.heatApp.preset1 = getValue('heatPresets1');
+  data.heatApp.height1 = getValue('height1');
+  data.heatApp.width1 = getValue('width1');
+  data.heatApp.decal1 = getValue('decal1');
+  data.heatApp.preset2 = getValue('heatPresets2');
+  data.heatApp.height2 = getValue('height2');
+  data.heatApp.width2 = getValue('width2');
+  data.heatApp.decal2 = getValue('decal2');
 }
 
 // figures out what the quantity array index should be
@@ -155,48 +169,6 @@ function setIndex() {
   } else if (number >= 800) {
     return 17;
   }
-}
-
-// Collects all the form data
-
-function getAllData() {
-  data.garment = getValue('garment');
-  data.exGarment = getValue('exactGar');
-  data.addMarkup = document.getElementById('markup').checked;
-  data.quantity = getValue('quantity');
-  data.exactQty = getValue('exactQty');
-  data.qtyIndex = setIndex();
-
-  if (data.exactQty) {
-    data.quantity = breaks[data.qtyIndex];
-    document.getElementById('quantity').selectedIndex = data.qtyIndex;
-  }
-
-  data.addition = getValue('additional');
-
-  data.silkscreens = getValue('exactScr') || getValue('silkscreens');
-  data.imprints = [];
-  data.imprints.push(getValue('colors1'));
-  data.imprints.push(getValue('colors2'));
-  data.imprints.push(getValue('colors3'));
-  data.imprints.push(getValue('colors4'));
-  data.imprints.sort((a, b) => b - a);
-
-  data.embroidery = [];
-  data.embroidery.push(setStitches(getValue('emb1')));
-  data.embroidery.push(setStitches(getValue('emb2')));
-  data.embroidery.push(setStitches(getValue('emb3')));
-  data.embroidery.push(setStitches(getValue('emb4')));
-
-  data.heatApp = {};
-  data.heatApp.preset1 = getValue('heatPresets1');
-  data.heatApp.height1 = getValue('height1');
-  data.heatApp.width1 = getValue('width1');
-  data.heatApp.decal1 = getValue('decal1');
-  data.heatApp.preset2 = getValue('heatPresets2');
-  data.heatApp.height2 = getValue('height2');
-  data.heatApp.width2 = getValue('width2');
-  data.heatApp.decal2 = getValue('decal2');
 }
 
 // rounds a decimal up or down
@@ -260,10 +232,10 @@ function totalEmb(qty) {
 function calcEmb(stitches, amt) {
   let cost, chartRow;
 
-  if (amt == 1) {
+  if (amt === 1) {
     chartRow = embChart[6];
     cost = 3;
-  } else if (amt == 3) {
+  } else if (amt === 3) {
     chartRow = embChart[6];
     cost = 1;
   } else {
@@ -299,17 +271,6 @@ function setStitches(stitches) {
   return stitches;
 }
 
-// sets up onclick events for price levels
-
-(function highlight() {
-  for (let i = 1; i <= 6; i++) {
-    const item = document.getElementById('qty' + i);
-    item.addEventListener('click', function() {
-      item.classList.toggle('highlighted');
-    });
-  }
-})();
-
 // do this when the calculate button or enter key is pressed
 
 function calculate() {
@@ -335,6 +296,8 @@ function calculate() {
   document.getElementById('adj4').setAttribute('name', breaks[data.qtyIndex + 3]);
   document.getElementById('adj5').setAttribute('name', breaks[data.qtyIndex + 4]);
   document.getElementById('adj6').setAttribute('name', breaks[data.qtyIndex + 5]);
+
+  calcTime();
 }
 
 // calculates the price for a particular quantity and row
@@ -367,6 +330,56 @@ function calcCost(index) {
   return total;
 }
 
+// puts final cost into HTML element
+
+function setFinalCost(num, index, value) {
+  if (index > 17) {
+    document.getElementById(`cost${num}`).innerHTML = '';
+    document.getElementById(`qty${num}`).innerHTML = '';
+  } else {
+    // value += adjustments[data.quantity];
+    value += adjustments[breaks[index]].value ? adjustments[breaks[index]].value : 0;
+    document.getElementById(`cost${num}`).innerHTML = roundOff(value);
+    document.getElementById(`qty${num}`).innerHTML = `${breaks[index]} or more`;
+  }
+}
+
+// calculates a rough estimate of the time the job will take to print
+
+function calcTime() {
+  const quantity = data.exactQty || data.quantity;
+  const multiply = [0, 0.75, 1.125, 1.5, 1.875, 2.25, 2.625];
+
+  let time = 0;
+  for (let item of data.imprints) {
+    if (item) {
+      time += quantity * multiply[item];
+      time += item * 4;
+    }
+  }
+
+  const hours = Math.floor(time / 60);
+  let minutes = Math.floor(time % 60);
+
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+
+  setValue('time', `${hours}:${minutes}`);
+}
+
+// gets value from HTML element
+
+function getValue(id) {
+  return Number(document.getElementById(id).value);
+}
+
+// puts value into HTML element
+
+function setValue(id, value) {
+  document.getElementById(id).innerHTML = value;
+}
+
 // sets up click handler on calculate button
 
 document.getElementById('submit').onclick = function() {
@@ -389,6 +402,7 @@ document.addEventListener('keypress', function(e) {
 function adjustHandler(event) {
   adjustments[event.target.name].value = Number(event.target.value);
   adjustments[event.target.name].index = Number(event.target.selectedIndex);
+  calculate();
 }
 
 const adjList = document.querySelectorAll('.adjust');
@@ -396,3 +410,14 @@ const adjList = document.querySelectorAll('.adjust');
 for (let item of adjList) {
   item.addEventListener('change', adjustHandler);
 }
+
+// sets up onclick events for price levels
+
+(function highlight() {
+  for (let i = 1; i <= 6; i++) {
+    const item = document.getElementById('qty' + i);
+    item.addEventListener('click', function() {
+      item.classList.toggle('highlighted');
+    });
+  }
+})();
