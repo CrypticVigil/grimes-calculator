@@ -1,66 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Readme</title>
+    <link rel="stylesheet" href="helpstyle.css" />
+  </head>
 
-<head>
+  <body>
+    <div class="wrapper">
+      <h1>Pricing Calculator Readme</h1>
 
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Readme</title>
-	<link rel="stylesheet" href="helpstyle.css" />
+      <p>This file contains explanations of how the program works. Last edited on January 5, 2019.</p>
 
-</head>
+      <h2>Garment &amp; Quantity</h2>
 
-<body>
+      <ul>
+        <li>
+          The values for the garment cost dropdown items can be edited in the index.html file (found on the network
+          drive at Grimes Graphics > Documents > Forms > Calculator). They are contained in the tag that starts with
+          <code>&lt;select id="garment" class="leftSelect widthTwo"&gt;</code> The item price can be changed by editing
+          the number between the quotation marks of the value attribute. The option tags look like this:
+          <code>&lt;option value="3.40"&gt;Gildan 2000 (cotton t-shirts)&lt;/option&gt;</code> Only change the numbers
+          between the quotation marks. I usually round the prices up to the nearest 10 or 20 cents.
+        </li>
+        <li>
+          You can also change the item description by typing a new description between the option tags. Like this:
+          <code>&lt;option value="3.40"&gt;</code>New Description Here<code>&lt;/option&gt;</code>.
+        </li>
+        <li>
+          The Garment Cost input overrides the dropdown select. The checkbox indicates whether markup should be added to
+          the garment cost. When the checkbox is deselected, no markup is added.
+        </li>
+        <li>
+          The Exact Quantity input overrides the quantity dropdown. You can also add numbers by putting plus symbols
+          between the numbers and pressing enter.
+        </li>
+        <li>
+          The Additional Cost input is just for any extra fee or cost that isn't covered by the other options. It can
+          also take negative numbers if you want to offer a discount.
+        </li>
+      </ul>
 
-	<div class="wrapper">
+      <h2>Screen Printing</h2>
 
-		<h1>Pricing Calculator Readme</h1>
+      <ul>
+        <li>
+          The Exact Scr. input overrides the silkscreens dropdown. This is mainly used for jobs needing partial screens.
+          I generally charge half the silkscreens for a left chest imprint. So if a job needs a 5-color left chest
+          imprint, I would normally charge for 2.5 silkscreens.
+        </li>
+      </ul>
 
-		<p>This file contains explanations of how the program works. Last edited on June 13, 2018.</p>
+      <h2>Embroidery</h2>
 
-		<h2>Garment &amp; Quantity</h2>
+      <ul>
+        <li>
+          I recommend inputting the number of stitches in thousands. So you can simply put in 7 instead of 7000. It also
+          works with exact stitch counts, but just rounds up to the next thousand. Enter 6254 and it will calculate
+          based on 7000 stitches.
+        </li>
+        <li>For custom names, put in 5 for one-line names and 7 for two-line names.</li>
+      </ul>
 
-		<ul>
-			<li>The values for the first item dropdown can be edited in the calculator.html file. They are contained in the tag that starts with <code>&lt;select id="garment" class="leftSelect widthTwo"&gt;</code> The item price can be changed by editing the number between the quotation marks of the value attribute. The option tags look like this: <code>&lt;option value="3.00"&gt;Gildan 2000 (cotton t-shirts)&lt;/option&gt;</code></li>
-			<li>The Garment Cost input overrides the dropdown select. The checkbox indicates whether markup should be added to the garment cost. When the checkbox is deselected, no markup is added.</li>
-			<li>The Exact Quantity input overrides the quantity dropdown.</li>
-		</ul>
+      <h2>Heat Application</h2>
 
-		<h2>Screen Printing</h2>
+      <ul>
+        <li>
+          If you just type in a value for the Height, it will still work. It assumes you're using the full roll width.
+        </li>
+        <li>
+          The values for the preset options are contained in the tag that starts with
+          <code>&lt;select id="heatPresets" class="leftSelect widthOne"&gt;</code>
+        </li>
+      </ul>
 
-		<ul>
-			<li>The Exact Scr. input overrides the silkscreens dropdown. This is mainly used for jobs needing partial screens. If a job needs a 5-color left chest imprint, I would normally charge for 2.5 silkscreens.</li>
-			<li>The screen printing pricing doesn't run unless there's a value selected from the 1st Imprint dropdown.</li>
-		</ul>		
+      <h2>Pricing</h2>
 
-		<h2>Embroidery</h2>
+      <ul>
+        <li>
+          If you don't choose any options before clicking Calculate, the price will only be for the garment with markup.
+        </li>
+        <li>The adjustment dropdowns allow you to tweak the output price.</li>
+        <li>
+          The Est. Print Time only calculates print time. Embroidery or heat-application are not included in the
+          calculation.
+        </li>
+        <li>The Digitize Fee simply multiplies the stitch count times $4.</li>
+      </ul>
 
-		<ul>
-			<li>I recommend inputting the number of stitches in thousands. So you can simply put in 7 instead of 7000. It also works with exact stitch counts, but just rounds up to the next thousand. Enter 6254 and it will calculate based on 7000 stitches.</li>
-			<li>For custom names, put in 5 for one-line names and 7 for two-line names.</li>
-			<li>The embroidery pricing doesn't run unless there's a value entered in the Stitches 1st input box.</li>
-		</ul>		
+      <h2>Other Info</h2>
 
-		<h2>Heat Application</h2>
-
-		<ul>
-			<li>If you just type in a value for the Height, it will still work. It assumes you're using the full roll width.</li>
-			<li>The values for the preset options are contained in the tag that starts with <code>&lt;select id="heatPresets" class="leftSelect widthOne"&gt;</code></li>
-			<li>The heat application pricing doesn't run unless there's a value selected from the Preset Options dropdown or a value in the Height input.</li>
-		</ul>	
-
-		<h2>Price Information</h2>
-
-		<ul>
-			<li>If you don't choose any options before clicking Calculate, the price will only be for the garment with markup.</li>
-			<li>The adjustment dropdowns allow you to tweak the output price.</li>
-			<li>The Est. Print Time only calculates print time. Embroidery or heat-application are not included in the calculation.</li>
-			<li>The Digitize Fee simply multiplies the stitch count times $4.</li>
-		</ul>	
-
-	</div>
-
-</body>
-
+      <ul>
+        <li>
+          There are a few shortcut keys you can use. Enter or the E key is the same as clicking the calculate button.
+          The R key will reload the page so you can start a new price quote.
+        </li>
+      </ul>
+    </div>
+  </body>
 </html>
