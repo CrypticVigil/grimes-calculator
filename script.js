@@ -11,47 +11,47 @@ const breaks = [1, 3, 6, 9, 12, 18, 24, 36, 48, 60, 80, 100, 150, 200, 300, 400,
 // then 1-color, 2-color, etc.
 
 const firstImprintChart = [
-  [0, 11, 14, 17, 20, 23, 26], // 1 or more
-  [0, 9, 11.5, 14, 16.5, 19, 21.5], // 3 or more
+  [0, 10, 16, 22, 28, 34, 40], // 1 or more
+  [0, 8.5, 12.5, 16.5, 20.5, 24.5, 28.5], // 3 or more
   [0, 7, 9, 11, 13, 15, 17], // 6 or more
-  [0, 6, 7.8, 9.6, 11.4, 13.2, 15], // 9 or more
-  [0, 5, 6.4, 7.8, 9.2, 10.6, 12], // 12 or more
-  [0, 4.5, 5.7, 6.9, 8.1, 9.3, 10.5], // 18 or more
-  [0, 4, 5.1, 6.2, 7.3, 8.4, 9.5], // 24 or more
-  [0, 3.6, 4.6, 5.6, 6.6, 7.6, 8.6], // 36 or more
-  [0, 3.3, 4.2, 5.1, 6, 6.9, 7.8], // 48 or more
-  [0, 3, 3.8, 4.6, 5.4, 6.2, 7], // 60 or more
-  [0, 2.75, 3.5, 4.25, 5, 5.75, 6.5], // 80 or more
-  [0, 2.5, 3.2, 3.9, 4.6, 5.3, 6], // 100 or more
-  [0, 2.2, 2.8, 3.4, 4, 4.6, 5.2], // 150 or more
-  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 200 or more
-  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 300 or more
-  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 400 or more
-  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75], // 600 or more
-  [0, 2, 2.55, 3.1, 3.65, 4.2, 4.75] // 800 or more
+  [0, 5.6, 7.3, 9, 10.7, 12.4, 14.1], // 9 or more
+  [0, 4.2, 5.6, 7, 8.4, 9.8, 11.2], // 12 or more
+  [0, 3.8, 5.1, 6.4, 7.7, 9, 10.3], // 18 or more
+  [0, 3.4, 4.6, 5.8, 7, 8.2, 9.4], // 24 or more
+  [0, 3, 4.1, 5.2, 6.3, 7.4, 8.5], // 36 or more
+  [0, 2.7, 3.7, 4.7, 5.7, 6.7, 7.7], // 48 or more
+  [0, 2.4, 3.35, 4.3, 5.25, 6.2, 7.15], // 60 or more
+  [0, 2.2, 3.1, 4, 4.9, 5.8, 6.7], // 80 or more
+  [0, 2, 2.85, 3.7, 4.55, 5.4, 6.25], // 100 or more
+  [0, 1.8, 2.6, 3.4, 4.2, 5, 5.8], // 150 or more
+  [0, 1.6, 2.35, 3.1, 3.85, 4.6, 5.35], // 200 or more
+  [0, 1.45, 2.15, 2.85, 3.55, 4.25, 4.95], // 300 or more
+  [0, 1.3, 1.95, 2.6, 3.25, 3.9, 4.55], // 400 or more
+  [0, 1.2, 1.8, 2.4, 3, 3.6, 4.2], // 600 or more
+  [0, 1.15, 1.7, 2.25, 2.8, 3.35, 3.9] // 800 or more
 ];
 
 // this chart contains the pricing info for the second imprint
 
 const secondImprintChart = [
-  [0, 8, 11, 14, 17, 20, 23], // 1 or more
-  [0, 6.5, 9, 11.5, 14, 16.5, 19], // 3 or more
+  [0, 8, 14, 20, 26, 32, 38], // 1 or more
+  [0, 6.5, 10.5, 14.5, 18.5, 22.5, 26.5], // 3 or more
   [0, 5, 7, 9, 11, 13, 15], // 6 or more
-  [0, 4, 5.6, 7.2, 8.8, 10.4, 12], // 9 or more
-  [0, 3, 4.2, 5.4, 6.6, 7.8, 9], // 12 or more
-  [0, 2.7, 3.8, 4.9, 6, 7.1, 8.2], // 18 or more
-  [0, 2.4, 3.4, 4.4, 5.4, 6.4, 7.4], // 24 or more
-  [0, 2.2, 3.1, 4, 4.9, 5.8, 6.7], // 36 or more
-  [0, 2, 2.8, 3.6, 4.4, 5.2, 6], // 48 or more
-  [0, 1.8, 2.5, 3.2, 3.9, 4.6, 5.3], // 60 or more
-  [0, 1.65, 2.3, 2.95, 3.6, 4.25, 4.9], // 80 or more
-  [0, 1.5, 2.1, 2.7, 3.3, 3.9, 4.5], // 100 or more
-  [0, 1.3, 1.85, 2.4, 2.95, 3.5, 4.05], // 150 or more
-  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 200 or more
-  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 300 or more
-  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 400 or more
-  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7], // 600 or more
-  [0, 1.2, 1.7, 2.2, 2.7, 3.2, 3.7] // 800 or more
+  [0, 4.2, 5.9, 7.6, 9.3, 11, 12.7], // 9 or more
+  [0, 3.4, 4.8, 6.2, 7.6, 9, 10.4], // 12 or more
+  [0, 3.2, 4.5, 5.8, 7.1, 8.4, 9.7], // 18 or more
+  [0, 3, 4.2, 5.4, 6.6, 7.8, 9], // 24 or more
+  [0, 2.8, 3.9, 5, 6.1, 7.2, 8.3], // 36 or more
+  [0, 2.6, 3.6, 4.6, 5.6, 6.6, 7.6], // 48 or more
+  [0, 2.4, 3.35, 4.3, 5.25, 6.2, 7.15], // 60 or more
+  [0, 2.2, 3.1, 4, 4.9, 5.8, 6.7], // 80 or more
+  [0, 2, 2.85, 3.7, 4.55, 5.4, 6.25], // 100 or more
+  [0, 1.8, 2.6, 3.4, 4.2, 5, 5.8], // 150 or more
+  [0, 1.6, 2.35, 3.1, 3.85, 4.6, 5.35], // 200 or more
+  [0, 1.45, 2.15, 2.85, 3.55, 4.25, 4.95], // 300 or more
+  [0, 1.3, 1.95, 2.6, 3.25, 3.9, 4.55], // 400 or more
+  [0, 1.2, 1.8, 2.4, 3, 3.6, 4.2], // 600 or more
+  [0, 1.15, 1.7, 2.25, 2.8, 3.35, 3.9] // 800 or more
 ];
 
 // object for adjustment values
@@ -129,7 +129,6 @@ function getAllData() {
   if (data.heatApp.preset2 || data.heatApp.height2 || data.heatApp.decal2) {
     data.heatApp.app2 = true;
   }
-  console.log(data);
 }
 
 // figures out what the quantity array index should be
@@ -184,15 +183,18 @@ function setIndex() {
 
 // rounds a decimal up or down
 
-function roundOff(value) {
-  value = (value * 100).toFixed();
-  const lastDigit = value.toString().slice(-1);
-  if (lastDigit >= 4) {
-    value = Math.ceil(value / 10) * 10;
-  } else {
-    value = Math.floor(value / 10) * 10;
+function roundOff(value, index) {
+  if (index <= 13) {
+    value = (value * 100).toFixed();
+    const lastDigit = value.toString().slice(-1);
+    if (lastDigit >= 4) {
+      value = Math.ceil(value / 10) * 10;
+    } else {
+      value = Math.floor(value / 10) * 10;
+    }
+    value = value / 100;
   }
-  value = value / 100;
+
   return value.toFixed(2);
 }
 
@@ -515,10 +517,10 @@ function setFinalCost(num, index, value) {
   } else {
     // value += adjustments[data.quantity];
     value += adjustments[breaks[index]].value ? adjustments[breaks[index]].value : 0;
-    document.getElementById(`cost${num}`).innerHTML = roundOff(value);
+    document.getElementById(`cost${num}`).innerHTML = roundOff(value, index);
     document.getElementById(`qty${num}`).innerHTML = `${breaks[index]} or more`;
     if (num === '1') {
-      calcTotal(roundOff(value));
+      calcTotal(roundOff(value, index));
     }
   }
 }
