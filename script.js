@@ -85,7 +85,7 @@ function getAllData() {
   data.garment = garmentCost();
   data.addMarkup = document.getElementById('markup').checked;
   data.quantity = getValue('quantity');
-  data.exactQty = getValue('exactQty');
+  data.exactQty = getQty();
   data.qtyIndex = setIndex();
 
   if (data.exactQty) {
@@ -482,6 +482,14 @@ function calcCost(index) {
 
   if (data.embroidery[0] || data.embroidery[1] || data.embroidery[2] || data.embroidery[3]) {
     total += totalEmb(index);
+
+    let digitize = 0;
+
+    for (let item of data.embroidery) {
+      digitize += item * 4;
+    }
+
+    setValue('costDig', digitize);
   }
 
   if (data.heatApp.app1 && data.heatApp.app2) {
@@ -557,6 +565,22 @@ function getValue(id) {
 function setValue(id, value) {
   document.getElementById(id).innerHTML = value;
 }
+
+// checks for exact quantity
+
+function getQty() {
+  const value = document.getElementById('exactQty').value;
+  if (value.indexOf('+') > -1) {
+    const array = value.split('+');
+    const nums = array.map(item => Number(item));
+    document.getElementById('exactQty').value = nums.reduce(add);
+    return nums.reduce(add);
+  } else {
+    return Number(value);
+  }
+}
+
+const add = (a, b) => a + b;
 
 // sets up click handler on calculate button
 
