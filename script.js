@@ -57,24 +57,24 @@ const secondImprintChart = [
 // object for adjustment values
 
 const adjustments = {
-  1: { index: 4 },
-  3: { index: 4 },
-  6: { index: 4 },
-  9: { index: 4 },
-  12: { index: 4 },
-  18: { index: 4 },
-  24: { index: 4 },
-  36: { index: 4 },
-  48: { index: 4 },
-  60: { index: 4 },
-  80: { index: 4 },
-  100: { index: 4 },
-  150: { index: 4 },
-  200: { index: 4 },
-  300: { index: 4 },
-  400: { index: 4 },
-  600: { index: 4 },
-  800: { index: 4 }
+  1: { index: 4, highlight: false },
+  3: { index: 4, highlight: false },
+  6: { index: 4, highlight: false },
+  9: { index: 4, highlight: false },
+  12: { index: 4, highlight: false },
+  18: { index: 4, highlight: false },
+  24: { index: 4, highlight: false },
+  36: { index: 4, highlight: false },
+  48: { index: 4, highlight: false },
+  60: { index: 4, highlight: false },
+  80: { index: 4, highlight: false },
+  100: { index: 4, highlight: false },
+  150: { index: 4, highlight: false },
+  200: { index: 4, highlight: false },
+  300: { index: 4, highlight: false },
+  400: { index: 4, highlight: false },
+  600: { index: 4, highlight: false },
+  800: { index: 4, highlight: false }
 };
 
 // Collects all the form data
@@ -459,7 +459,32 @@ function calculate() {
   document.getElementById('adj5').setAttribute('name', breaks[data.qtyIndex + 4]);
   document.getElementById('adj6').setAttribute('name', breaks[data.qtyIndex + 5]);
 
+  document.getElementById('qty1').classList.remove('highlighted');
+  document.getElementById('qty2').classList.remove('highlighted');
+  document.getElementById('qty3').classList.remove('highlighted');
+  document.getElementById('qty4').classList.remove('highlighted');
+  document.getElementById('qty5').classList.remove('highlighted');
+  document.getElementById('qty6').classList.remove('highlighted');
+
+  document.getElementById('qty1').dataset.name = breaks[data.qtyIndex];
+  document.getElementById('qty2').dataset.name = breaks[data.qtyIndex + 1];
+  document.getElementById('qty3').dataset.name = breaks[data.qtyIndex + 2];
+  document.getElementById('qty4').dataset.name = breaks[data.qtyIndex + 3];
+  document.getElementById('qty5').dataset.name = breaks[data.qtyIndex + 4];
+  document.getElementById('qty6').dataset.name = breaks[data.qtyIndex + 5];
+
+  highlightCheck(breaks[data.qtyIndex], 'qty1');
+  highlightCheck(breaks[data.qtyIndex + 1], 'qty2');
+  highlightCheck(breaks[data.qtyIndex + 2], 'qty3');
+  highlightCheck(breaks[data.qtyIndex + 3], 'qty4');
+  highlightCheck(breaks[data.qtyIndex + 4], 'qty5');
+  highlightCheck(breaks[data.qtyIndex + 5], 'qty6');
+
   calcTime();
+
+  const xxl = document.getElementById('garment');
+  const index = xxl.options.selectedIndex;
+  setValue('xxl', xxl[index].dataset.xxl);
 }
 
 // calculates the price for a particular quantity and row
@@ -502,8 +527,6 @@ function calcCost(index) {
     total += appCost(breaks[index]);
     total += itemCost(breaks[index], 1);
   }
-
-  // TODO: add digitize fee and total cost
 
   return total;
 }
@@ -620,8 +643,20 @@ for (let item of adjList) {
 (function highlight() {
   for (let i = 1; i <= 6; i++) {
     const item = document.getElementById('qty' + i);
-    item.addEventListener('click', function() {
+    item.addEventListener('click', function(event) {
       item.classList.toggle('highlighted');
+      const num = event.target.dataset.name;
+      if (adjustments[num].highlight) {
+        adjustments[num].highlight = false;
+      } else {
+        adjustments[num].highlight = true;
+      }
     });
   }
 })();
+
+function highlightCheck(num, id) {
+  if (num && adjustments[num].highlight) {
+    document.getElementById(id).classList.add('highlighted');
+  }
+}

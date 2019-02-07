@@ -22,8 +22,9 @@
           drive at Grimes Graphics > Documents > Forms > Calculator). They are contained in the tag that starts with
           <code>&lt;select id="garment" class="leftSelect widthTwo"&gt;</code> The item price can be changed by editing
           the number between the quotation marks of the value attribute. The option tags look like this:
-          <code>&lt;option value="3.40"&gt;Gildan 2000 (cotton t-shirts)&lt;/option&gt;</code> Only change the numbers
-          between the quotation marks. I usually round the prices up to the nearest 10 or 20 cents.
+          <code>&lt;option value="3.40" data-xxl="2.60"&gt;Gildan 2000 (cotton t-shirts)&lt;/option&gt;</code> Only
+          change the numbers between the quotation marks. I usually round the prices up to the nearest 10 or 20 cents.
+          To update the 2XL price, change the value in the data-xxl quotation marks.
         </li>
         <li>
           You can also change the item description by typing a new description between the option tags. Like this:
@@ -83,6 +84,10 @@
           If you don't choose any options before clicking Calculate, the price will only be for the garment with markup.
         </li>
         <li>The adjustment dropdowns allow you to tweak the output price.</li>
+        <li>
+          If you click on "XX or more", it will highlight that row. This can be useful for remembering which amounts you
+          are quoting for a specific order.
+        </li>
         <li>
           The Est. Print Time only calculates print time. Embroidery or heat-application are not included in the
           calculation.

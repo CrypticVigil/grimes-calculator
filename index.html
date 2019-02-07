@@ -21,32 +21,32 @@
 							Example: value="(new number here)"
 							-->
 
-            <option value="3.20" selected="selected">Gildan 5000 (basic t-shirts)</option>
-            <option value="1.00">Items Supplied by Customer</option>
-            <option value="5.80">Gildan 5400 (long-sleeve t-shirts)</option>
-            <option value="3.40">Gildan 8000 (blended t-shirts)</option>
-            <option value="3.40">Gildan 2000 (cotton t-shirts)</option>
-            <option value="7.60">Gildan 2300 (pocket t-shirts)</option>
-            <option value="6.40">Gildan 2400 (long-sleeve t-shirts)</option>
-            <option value="3.20">Jerzees 29M (50/50 t-shirts)</option>
-            <option value="7.20">Jerzees 29P (pocket t-shirts)</option>
-            <option value="7.20">Jerzees 29L (long-sleeve t-shirts)</option>
-            <option value="4.60">Hanes 5180 (beefy tees)</option>
+            <option value="3.20" data-xxl="2.40" selected="selected">Gildan 5000 (basic t-shirts)</option>
+            <option value="1.00" data-xxl="0">Items Supplied by Customer</option>
+            <option value="5.80" data-xxl="1.80">Gildan 5400 (long-sleeve t-shirts)</option>
+            <option value="3.40" data-xxl="2.60">Gildan 8000 (blended t-shirts)</option>
+            <option value="3.40" data-xxl="2.60">Gildan 2000 (cotton t-shirts)</option>
+            <option value="7.60" data-xxl="2.00">Gildan 2300 (pocket t-shirts)</option>
+            <option value="6.40" data-xxl="2.60">Gildan 2400 (long-sleeve t-shirts)</option>
+            <option value="3.20" data-xxl="2.60">Jerzees 29M (50/50 t-shirts)</option>
+            <option value="7.20" data-xxl="2.20">Jerzees 29P (pocket t-shirts)</option>
+            <option value="7.20" data-xxl="1.40">Jerzees 29L (long-sleeve t-shirts)</option>
+            <option value="4.60" data-xxl="2.80">Hanes 5180 (beefy tees)</option>
 
-            <option value="5.20">UltraClub 8101 (basic caps)</option>
-            <option value="10.60">Richardson 585 (flexfit caps)</option>
-            <option value="4.00">UltraClub 8130/8131 (knit beanies)</option>
-            <option value="11.00">UltraClub 8540 (blended polos)</option>
-            <option value="10.20">Port Authority K540 (performance polos)</option>
+            <option value="5.20" data-xxl="0">UltraClub 8101 (basic caps)</option>
+            <option value="10.60" data-xxl="0">Richardson 585 (flexfit caps)</option>
+            <option value="4.00" data-xxl="0">UltraClub 8130/8131 (knit beanies)</option>
+            <option value="11.00" data-xxl="1.00">UltraClub 8540 (blended polos)</option>
+            <option value="10.20" data-xxl="1.00">Port Authority K540 (performance polos)</option>
 
-            <option value="5.80">Gildan 42000 (polyester t-shirts)</option>
-            <option value="4.60">Augusta 790 (polyester t-shirts)</option>
-            <option value="8.80">Gildan 18000 (crew-neck sweatshirts)</option>
-            <option value="13.20">Gildan 18500 (pullover hoodies)</option>
-            <option value="15.60">Gildan 18600 (full-zip hoodies)</option>
-            <option value="9.60">Gildan 12000 (crew-neck sweatshirts)</option>
-            <option value="14.60">Gildan 12500 (pullover hoodies)</option>
-            <option value="21.20">Gildan 12600 (full-zip hoodies)</option> </select
+            <option value="5.80" data-xxl="1.00">Gildan 42000 (polyester t-shirts)</option>
+            <option value="4.60" data-xxl="1.00">Augusta 790 (polyester t-shirts)</option>
+            <option value="8.80" data-xxl="2.20">Gildan 18000 (crew-neck sweatshirts)</option>
+            <option value="13.20" data-xxl="4.40">Gildan 18500 (pullover hoodies)</option>
+            <option value="15.60" data-xxl="7.60">Gildan 18600 (full-zip hoodies)</option>
+            <option value="9.60" data-xxl="4.40">Gildan 12000 (crew-neck sweatshirts)</option>
+            <option value="14.60" data-xxl="7.40">Gildan 12500 (pullover hoodies)</option>
+            <option value="21.20" data-xxl="3.20">Gildan 12600 (full-zip hoodies)</option> </select
           ><!--
 					--><input id="exactGar" class="minusCheckbox" placeholder="Garment Cost" /><!--
 					--><input type="checkbox" id="markup" class="checkbox" title="Check to add markup." checked /><!--
@@ -191,7 +191,7 @@
 
       <div class="row rightSize">
         <hr />
-        <p id="qty1" class="leftP">12 or more</p>
+        <p id="qty1" data-name="12" class="leftP">12 or more</p>
         <p class="rightP">$<span id="cost1">0.00</span></p>
         <select name="12" id="adj1" class="adjust">
           <option value="-0.40">- 0.40</option>
@@ -206,7 +206,7 @@
         </select>
 
         <hr />
-        <p id="qty2" class="leftP">18 or more</p>
+        <p id="qty2" data-name="18" class="leftP">18 or more</p>
         <p class="rightP">$<span id="cost2">0.00</span></p>
         <select name="18" id="adj2" class="adjust">
           <option value="-0.40">- 0.40</option>
@@ -221,7 +221,7 @@
         </select>
 
         <hr />
-        <p id="qty3" class="leftP">24 or more</p>
+        <p id="qty3" data-name="24" class="leftP">24 or more</p>
         <p class="rightP">$<span id="cost3">0.00</span></p>
         <select name="24" id="adj3" class="adjust">
           <option value="-0.40">- 0.40</option>
@@ -236,7 +236,7 @@
         </select>
 
         <hr />
-        <p id="qty4" class="leftP">36 or more</p>
+        <p id="qty4" data-name="36" class="leftP">36 or more</p>
         <p class="rightP">$<span id="cost4">0.00</span></p>
         <select name="36" id="adj4" class="adjust">
           <option value="-0.40">- 0.40</option>
@@ -251,7 +251,7 @@
         </select>
 
         <hr />
-        <p id="qty5" class="leftP">48 or more</p>
+        <p id="qty5" data-name="48" class="leftP">48 or more</p>
         <p class="rightP">$<span id="cost5">0.00</span></p>
         <select name="48" id="adj5" class="adjust">
           <option value="-0.40">- 0.40</option>
@@ -266,7 +266,7 @@
         </select>
 
         <hr />
-        <p id="qty6" class="leftP">60 or more</p>
+        <p id="qty6" data-name="60" class="leftP">60 or more</p>
         <p class="rightP">$<span id="cost6">0.00</span></p>
         <select name="60" id="adj6" class="adjust">
           <option value="-0.40">- 0.40</option>
@@ -279,6 +279,10 @@
           <option value="0.30">+ 0.30</option>
           <option value="0.40">+ 0.40</option>
         </select>
+
+        <hr />
+        <p class="leftP">Add for 2XL</p>
+        <p class="rightP">+$<span id="xxl">0.00</span></p>
 
         <hr />
         <p class="leftP">Total Cost w/tax <span class="small">(for lowest qty.)</span></p>
