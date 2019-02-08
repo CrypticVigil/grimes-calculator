@@ -422,7 +422,9 @@ function itemCost(qty, num) {
   let itemCost;
 
   if (getValue('decal' + num)) {
-    itemCost = getValue('decal' + num);
+    itemCost = document.getElementById(`decalMark${num}`).checked
+      ? Number(roundOff(getValue(`decal${num}`) * 1.25, 0))
+      : getValue(`decal${num}`);
   } else if (getValue('height' + num)) {
     const width = getValue('width' + num) || 18;
     const height = getValue('height' + num);
