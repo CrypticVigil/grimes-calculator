@@ -484,9 +484,13 @@ function calculate() {
 
   calcTime();
 
-  const xxl = document.getElementById('garment');
-  const index = xxl.options.selectedIndex;
-  setValue('xxl', xxl[index].dataset.xxl);
+  if (!getValue('exactGar')) {
+    const xxl = document.getElementById('garment');
+    const index = xxl.options.selectedIndex;
+    setValue('xxl', xxl[index].dataset.xxl);
+  } else {
+    setValue('xxl', 0);
+  }
 }
 
 // calculates the price for a particular quantity and row
