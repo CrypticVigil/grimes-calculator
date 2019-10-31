@@ -1,27 +1,38 @@
 html {
-  background-color: #ecf0f4;
   color: #003c60;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5em; }
+
+.head-wrapper {
+  width: 1080px;
+  margin: auto; }
 
 .wrapper {
   width: 1080px;
-  margin: auto; }
+  margin: 40px auto 0 auto;
+  display: flex; }
+
+.wrapper__left {
+  width: 520px;
+  margin-right: 40px; }
+
+.wrapper__right {
+  width: 520px; }
 
 h1 {
   padding-bottom: 12px;
   border-bottom: 1px solid #d8dce0; }
 
 h2 {
-  color: #788088;
+  color: #00aadc;
   padding-bottom: 8px;
   border-bottom: 1px solid #d8dce0; }
+  h2:first-of-type {
+    margin-top: 0; }
 
 ul {
   padding-left: 24px; }
 
 li {
   margin-bottom: 8px; }
-
-/*# sourceMappingURL=helpstyle.css.map */

@@ -19,33 +19,50 @@ $sixth: 4px;
 // ---- PAGE STRUCTURE ---- //
 
 html {
-	background-color: $lightestGray;
-	color: $darkBlue;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 18px;
-	line-height: 1.5em;
+  color: $darkBlue;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+.head-wrapper {
+  width: 1080px;
+  margin: auto;
 }
 
 .wrapper {
-	width: 1080px;
-	margin: auto;
+  width: 1080px;
+  margin: 40px auto 0 auto;
+  display: flex;
+}
+
+.wrapper__left {
+  width: 520px;
+  margin-right: 40px;
+}
+
+.wrapper__right {
+  width: 520px;
 }
 
 h1 {
-	padding-bottom: 12px;
-	border-bottom: 1px solid $lighterGray;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $lighterGray;
 }
 
 h2 {
-	color: $coolGray;
-	padding-bottom: 8px;
-	border-bottom: 1px solid $lighterGray;
+  color: $lightBlue;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $lighterGray;
+  &:first-of-type {
+    margin-top: 0;
+  }
 }
 
 ul {
-	padding-left: 24px;
+  padding-left: 24px;
 }
 
 li {
-	margin-bottom: 8px;
+  margin-bottom: 8px;
 }

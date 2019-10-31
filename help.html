@@ -9,100 +9,130 @@
   </head>
 
   <body>
-    <div class="wrapper">
+    <div class="head-wrapper">
       <h1>Pricing Calculator Readme</h1>
 
-      <p>This file contains explanations of how the program works. Last edited on January 5, 2019.</p>
+      <p>This file contains explanations of how the program works. Last edited on October 31, 2019.</p>
+    </div>
 
-      <h2>Garment &amp; Quantity</h2>
+    <div class="wrapper">
+      <div class="wrapper__left">
+        <h2>Garment &amp; Quantity</h2>
 
-      <ul>
-        <li>
-          The values for the garment cost dropdown items can be edited in the index.html file (found on the network
-          drive at Grimes Graphics > Documents > Forms > Calculator). They are contained in the tag that starts with
-          <code>&lt;select id="garment" class="leftSelect widthTwo"&gt;</code> The item price can be changed by editing
-          the number between the quotation marks of the value attribute. The option tags look like this:
-          <code>&lt;option value="3.40" data-xxl="2.60"&gt;Gildan 2000 (cotton t-shirts)&lt;/option&gt;</code> Only
-          change the numbers between the quotation marks. I usually round the prices up to the nearest 10 or 20 cents.
-          To update the 2XL price, change the value in the data-xxl quotation marks.
-        </li>
-        <li>
-          You can also change the item description by typing a new description between the option tags. Like this:
-          <code>&lt;option value="3.40"&gt;</code>New Description Here<code>&lt;/option&gt;</code>.
-        </li>
-        <li>
-          The Garment Cost input overrides the dropdown select. The checkbox indicates whether markup should be added to
-          the garment cost. When the checkbox is deselected, no markup is added.
-        </li>
-        <li>
-          The Exact Quantity input overrides the quantity dropdown. You can also add numbers by putting plus symbols
-          between the numbers and pressing enter.
-        </li>
-        <li>
-          The Additional Cost input is just for any extra fee or cost that isn't covered by the other options. It can
-          also take negative numbers if you want to offer a discount.
-        </li>
-      </ul>
+        <ul>
+          <li>
+            The values for the garment cost dropdown items can be edited in the index.html file (found on the network
+            drive at Grimes Graphics > Documents > Forms > Calculator). They are contained in the tag that starts with
+            <code>&lt;select id="garment" class="leftSelect widthTwo"&gt;</code> The item price can be changed by
+            editing the number between the quotation marks of the value attribute. The option tags look like this:
+            <code>&lt;option value="3.40" data-xxl="2.60"&gt;Gildan 2000 (cotton t-shirts)&lt;/option&gt;</code> Only
+            change the numbers between the quotation marks. I usually round the prices up to the nearest 10 or 20 cents.
+            To update the 2XL price, change the value in the data-xxl quotation marks.
+          </li>
+          <li>
+            You can also change the item description by typing a new description between the option tags. Like this:
+            <code>&lt;option value="3.40" data-xxl="2.60"&gt;</code>New Description Here<code>&lt;/option&gt;</code>.
+          </li>
+          <li>
+            The Garment Cost input overrides the dropdown select. The checkbox indicates whether markup should be added
+            to the garment cost. When there is not check in the checkbox, no markup is added.
+          </li>
+          <li>
+            The Exact Quantity input overrides the quantity dropdown. You can also use this input to do basic addition.
+            If you put in a sequence of numbers with plus symbols in between each number, it will total the numbers when
+            you hit calculate (or Enter). For example, if you put in <code>5+9+13+2</code> and press enter it will
+            change to 29.
+          </li>
+          <li>
+            The Additional Cost input is just for any extra fee or cost that isn't covered by the other options. It can
+            also take negative numbers if you want to offer a discount.
+          </li>
+        </ul>
 
-      <h2>Screen Printing</h2>
+        <h2>Screen Printing</h2>
 
-      <ul>
-        <li>
-          The Exact Scr. input overrides the silkscreens dropdown. This is mainly used for jobs needing partial screens.
-          I generally charge half the silkscreens for a left chest imprint. So if a job needs a 5-color left chest
-          imprint, I would normally charge for 2.5 silkscreens.
-        </li>
-      </ul>
+        <ul>
+          <li>
+            The Exact Scr. input overrides the silkscreens dropdown. This is mainly used for jobs needing partial
+            screens. I generally charge half the silkscreens for a left chest imprint. So if a job needs a 5-color left
+            chest imprint, I would normally charge for 2.5 silkscreens.
+          </li>
+          <li>
+            It doesn't matter which order you put in the imprints. For example, if you put in 2nd and 4th imprints only,
+            it will still work fine.
+          </li>
+        </ul>
 
-      <h2>Embroidery</h2>
+        <h2>Embroidery</h2>
 
-      <ul>
-        <li>
-          I recommend inputting the number of stitches in thousands. So you can simply put in 7 instead of 7000. It also
-          works with exact stitch counts, but just rounds up to the next thousand. Enter 6254 and it will calculate
-          based on 7000 stitches.
-        </li>
-        <li>For custom names, put in 5 for one-line names and 7 for two-line names.</li>
-      </ul>
+        <ul>
+          <li>
+            I recommend inputting the number of stitches in thousands. So you can simply put in 7 instead of 7000. It
+            also works with exact stitch counts, but just rounds up to the next thousand. Enter 6254 and it will
+            calculate based on 7000 stitches.
+          </li>
+          <li>For custom names, put in 5 for one-line names and 7 for two-line names.</li>
+        </ul>
+      </div>
 
-      <h2>Heat Application</h2>
+      <div class="wrapper__right">
+        <h2>Heat Application</h2>
 
-      <ul>
-        <li>
-          If you just type in a value for the Height, it will still work. It assumes you're using the full roll width.
-        </li>
-        <li>
-          The values for the preset options are contained in the tag that starts with
-          <code>&lt;select id="heatPresets" class="leftSelect widthOne"&gt;</code>
-        </li>
-      </ul>
+        <ul>
+          <li>
+            If you just type in a value for the Height, it will still work. It assumes you're using the full roll width.
+          </li>
+          <li>
+            The values for the preset options are contained in the tag that starts with
+            <code>&lt;select id="heatPresets" class="leftSelect widthOne"&gt;</code>
+          </li>
+        </ul>
 
-      <h2>Pricing</h2>
+        <h2>Pricing</h2>
 
-      <ul>
-        <li>
-          If you don't choose any options before clicking Calculate, the price will only be for the garment with markup.
-        </li>
-        <li>The adjustment dropdowns allow you to tweak the output price.</li>
-        <li>
-          If you click on "XX or more", it will highlight that row. This can be useful for remembering which amounts you
-          are quoting for a specific order.
-        </li>
-        <li>
-          The Est. Print Time only calculates print time. Embroidery or heat-application are not included in the
-          calculation.
-        </li>
-        <li>The Digitize Fee simply multiplies the stitch count times $4.</li>
-      </ul>
+        <ul>
+          <li>
+            If you don't choose any options before clicking Calculate, the price will only be for the garment with
+            markup.
+          </li>
+          <li>
+            The adjustment dropdowns allow you to tweak the output price up to $0.40. For example, if you price an item
+            that shows it will cost $7.10 per shirt. You could decide to round down the 10 cents and just charge $7.00.
+            Then you could price other items and the reduction would still apply.
+          </li>
+          <li>
+            If you click on "XX or more", it will highlight that row. This can be useful for remembering which amounts
+            you are quoting for a specific order.
+          </li>
+          <li>
+            The Est. Print Time only calculates print time. Embroidery or heat-application are not included in the
+            calculation.
+          </li>
+          <li>The Digitize Fee simply multiplies the stitch count times $4.</li>
+        </ul>
 
-      <h2>Other Info</h2>
+        <h2>Other Info</h2>
 
-      <ul>
-        <li>
-          There are a few shortcut keys you can use. Enter or the E key is the same as clicking the calculate button.
-          The R key will reload the page so you can start a new price quote.
-        </li>
-      </ul>
+        <ul>
+          <li>
+            There are a few shortcut keys you can use. Enter or the E key is the same as clicking the calculate button.
+            The R key will reload the page so you can start a new price quote.
+          </li>
+          <li>
+            If you want to make changes to the prices, you'll need to edit the index.html file (see Garment &amp;
+            Quantity section for more details). This can be done with Notepad if needed, but it's much easier to use a
+            code editor like VS Code, Adobe Dreamweaver, or Notepad++. VS Code and Notepad++ are available for free.
+          </li>
+          <li>
+            Before you make any changes to the code files, make sure to have a backup somewhere in case something
+            breaks. Google Drive would be a good option, or just another folder on the network drive.
+          </li>
+          <li>
+            If something does break, make sure to check that all the quotation marks and &gt; or &lt; symbols are in the
+            right places. A mistake even that small could break the whole page.
+          </li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
