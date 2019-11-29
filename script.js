@@ -491,6 +491,10 @@ function calculate() {
   } else {
     setValue('xxl', 0);
   }
+
+  const today = new Date();
+
+  setValue('todays-date', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`);
 }
 
 // calculates the price for a particular quantity and row

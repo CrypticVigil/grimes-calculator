@@ -142,6 +142,9 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
+.screen-hide {
+  display: none; }
+
 @media only screen and (min-width: 1000px) {
   .wrapper {
     position: absolute;
@@ -433,3 +436,69 @@ html {
 
   button:active {
     background-color: #5b9b35; } }
+@media print {
+  #submit,
+  .help,
+  .adjust,
+  .checkbox {
+    display: none; }
+
+  .screen-hide {
+    display: flex;
+    width: 100%;
+    padding: 0 1rem 0.5rem 1rem; }
+    .screen-hide img {
+      height: 60px; }
+    .screen-hide p {
+      font-size: 1.25rem;
+      letter-spacing: 4px;
+      width: calc(80% - 240px);
+      padding-left: 0.75rem;
+      line-height: 60px; }
+    .screen-hide aside {
+      width: 20%;
+      text-align: end;
+      line-height: 60px;
+      font-size: 1.25rem; }
+
+  html {
+    background-color: white;
+    color: black; }
+
+  .wrapper {
+    width: 100%;
+    padding: 0 1.5rem; }
+
+  h1 {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem; }
+
+  select,
+  input {
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding: 0.25rem; }
+
+  .widthTwo {
+    width: calc(60% + 14px); }
+
+  .widthOne,
+  #exactGar,
+  #exactScr,
+  #exactQty,
+  #additional {
+    width: 30%; }
+
+  .widthQuarter {
+    width: calc(25% - 14px); }
+
+  .widthHA {
+    width: 20%; }
+
+  .leftP {
+    display: inline; }
+    .leftP::after {
+      content: ' - '; }
+
+  .rightP {
+    display: inline; } }
