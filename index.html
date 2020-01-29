@@ -322,7 +322,17 @@
       </div>
     </div>
 
+    <button onclick="clipboard()" id="copy-button">Copy</button>
     <button onclick="window.print()" id="print-button">Print</button>
+
+    <div id="copy-modal">
+      <div class="copy-modal__container">
+        <font size="2">
+          <p id="copy-modal__paragraph"></p>
+        </font>
+        <button onclick="closeModal()" id="copy-close">X</button>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>

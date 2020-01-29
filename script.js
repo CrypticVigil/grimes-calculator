@@ -670,3 +670,42 @@ function highlightCheck(num, id) {
     document.getElementById(id).classList.add('highlighted');
   }
 }
+
+function clipboard() {
+  let description = document.getElementById('garment');
+  description = description.options[description.selectedIndex].text;
+
+  let priceChart = `${description.bold()}<br/>`;
+
+  let imprints = 'w/';
+
+  for (let item in data.imprints) {
+    if (data.imprints[item] > 0) {
+      imprints += `${data.imprints[item]}-color, `;
+    }
+  }
+
+  imprints = imprints.slice(0, -2);
+
+  imprints += ' imprints<br/>';
+
+  priceChart += `${imprints.italics()}`;
+
+  let selected = [...document.querySelectorAll('.highlighted')];
+
+  for (let item in selected) {
+    let num = selected[item].id.slice(-1);
+    num = 'cost' + num;
+    priceChart += `» ${selected[item].innerHTML} = $${document.getElementById(num).innerHTML}<br/>`;
+  }
+
+  const para = document.getElementById('copy-modal__paragraph');
+
+  para.innerHTML = priceChart;
+
+  document.getElementById('copy-modal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('copy-modal').style.display = 'none';
+}

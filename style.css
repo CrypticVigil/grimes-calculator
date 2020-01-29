@@ -319,7 +319,68 @@ html {
     box-shadow: inset 0 0 12px #50882f; }
 
   #print-button:active {
-    background-color: #5b9b35; } }
+    background-color: #5b9b35; }
+
+  #print-button:focus {
+    outline: none; }
+
+  #copy-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #72bf44;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem 1rem 0.75rem;
+    border-bottom-right-radius: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px #457528;
+    z-index: 2; }
+
+  #copy-button:hover {
+    box-shadow: inset 0 0 12px #50882f; }
+
+  #copy-button:active {
+    background-color: #5b9b35; }
+
+  #copy-button:focus {
+    outline: none; }
+
+  .copy-modal__container {
+    display: flex; }
+
+  #copy-modal {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3); }
+    #copy-modal p {
+      padding: 1rem;
+      background-color: white;
+      border: 1px solid gainsboro;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      color: black; }
+    #copy-modal b {
+      font-weight: bold; }
+    #copy-modal i {
+      font-style: italic; }
+
+  #copy-close {
+    background-color: red;
+    color: white;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 1px solid red;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    width: 2rem; } }
 @media only screen and (max-width: 1000px) {
   html {
     width: 720px; }
@@ -460,7 +521,8 @@ html {
   #submit:active {
     background-color: #5b9b35; }
 
-  #print-button {
+  #print-button,
+  #copy-button {
     display: none; } }
 @media print {
   #submit,
