@@ -696,7 +696,7 @@ function clipboard() {
   for (let item in selected) {
     let num = selected[item].id.slice(-1);
     num = 'cost' + num;
-    priceChart += `» ${selected[item].innerHTML} = $${document.getElementById(num).innerHTML}<br/>`;
+    priceChart += `» ${selected[item].innerHTML} = $${document.getElementById(num).innerHTML} each<br/>`;
   }
 
   const para = document.getElementById('copy-modal__paragraph');
@@ -704,8 +704,24 @@ function clipboard() {
   para.innerHTML = priceChart;
 
   document.getElementById('copy-modal').style.display = 'flex';
+
+  let range = document.createRange();
+  range.selectNode(document.getElementById('copy-modal__paragraph'));
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  document.execCommand('copy');
+
+  document.getElementById('copy-modal').style.display = 'none';
 }
 
 function closeModal() {
   document.getElementById('copy-modal').style.display = 'none';
+}
+
+function selectText(id) {
+  let range = document.createRange();
+  range.selectNode(document.getElementById(id));
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  document.execCommand('copy');
 }

@@ -353,34 +353,15 @@ html {
 
   #copy-modal {
     position: absolute;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.3); }
+    left: -90px;
+    display: none; }
     #copy-modal p {
-      padding: 1rem;
-      background-color: white;
-      border: 1px solid gainsboro;
-      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-      color: black; }
+      color: black;
+      background-color: white; }
     #copy-modal b {
       font-weight: bold; }
     #copy-modal i {
-      font-style: italic; }
-
-  #copy-close {
-    background-color: red;
-    color: white;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border: 1px solid red;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-    width: 2rem; } }
+      font-style: italic; } }
 @media only screen and (max-width: 1000px) {
   html {
     width: 720px; }

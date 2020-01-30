@@ -415,21 +415,11 @@ html {
 
   #copy-modal {
     position: absolute;
+    left: -90px;
     display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
     p {
-      padding: 1rem;
-      background-color: white;
-      border: 1px solid gainsboro;
-      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-      border-top-left-radius: $sixth * 2;
-      border-bottom-left-radius: $sixth * 2;
       color: black;
+      background-color: white;
     }
     b {
       font-weight: bold;
@@ -437,16 +427,6 @@ html {
     i {
       font-style: italic;
     }
-  }
-
-  #copy-close {
-    background-color: red;
-    color: white;
-    border-top-right-radius: $sixth * 2;
-    border-bottom-right-radius: $sixth * 2;
-    border: 1px solid red;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-    width: 2rem;
   }
 }
 
