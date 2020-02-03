@@ -699,6 +699,8 @@ function clipboard() {
     priceChart += `» ${selected[item].innerHTML} = $${document.getElementById(num).innerHTML} each<br/>`;
   }
 
+  priceChart += `~ add $${document.getElementById('xxl').innerHTML} for 2XL`;
+
   const para = document.getElementById('copy-modal__paragraph');
 
   para.innerHTML = priceChart;
@@ -711,10 +713,6 @@ function clipboard() {
   window.getSelection().addRange(range);
   document.execCommand('copy');
 
-  document.getElementById('copy-modal').style.display = 'none';
-}
-
-function closeModal() {
   document.getElementById('copy-modal').style.display = 'none';
 }
 
