@@ -746,7 +746,8 @@ $grimes-blue: #00a0ff;
     // justify-self: flex-end;
   }
 
-  #print-button {
+  #print-button,
+  #copy-button {
     display: none;
   }
 }

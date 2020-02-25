@@ -616,5 +616,6 @@ html {
   .leftP {
     display: block; }
 
-  #print-button {
+  #print-button,
+  #copy-button {
     display: none; } }
