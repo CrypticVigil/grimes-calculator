@@ -396,21 +396,25 @@ function checkBoth(height, width, qty) {
   return Number(lower.toFixed(2));
 }
 
-function appCost(inputQty) {
+function appCost(inputQty, num) {
   let application;
 
   if (inputQty < 6) {
-    application = 3;
-  } else if (6 <= inputQty && inputQty < 12) {
     application = 2.4;
-  } else if (12 <= inputQty && inputQty < 24) {
+  } else if (6 <= inputQty && inputQty < 12) {
     application = 2;
-  } else if (24 <= inputQty && inputQty < 48) {
-    application = 1.8;
-  } else if (48 <= inputQty && inputQty < 100) {
+  } else if (12 <= inputQty && inputQty < 24) {
     application = 1.6;
-  } else if (100 <= inputQty) {
+  } else if (24 <= inputQty && inputQty < 48) {
     application = 1.4;
+  } else if (48 <= inputQty && inputQty < 100) {
+    application = 1.2;
+  } else if (100 <= inputQty) {
+    application = 1.0;
+  }
+
+  if (document.getElementById(`twoColor${num}`).checked) {
+    application *= 1.5;
   }
 
   return application;
@@ -421,10 +425,8 @@ function appCost(inputQty) {
 function itemCost(qty, num) {
   let itemCost;
 
-  if (getValue('decal' + num)) {
-    itemCost = document.getElementById(`decalMark${num}`).checked
-      ? Number(roundOff(getValue(`decal${num}`) * 1.25, 0))
-      : getValue(`decal${num}`);
+  if (data.heatApp['decal' + num]) {
+    itemCost = data.heatApp['decal' + num];
   } else if (getValue('height' + num)) {
     const width = getValue('width' + num) || 18;
     const height = getValue('height' + num);
@@ -432,6 +434,11 @@ function itemCost(qty, num) {
   } else {
     itemCost = getValue('heatPresets' + num);
   }
+
+  if (document.getElementById(`twoColor${num}`).checked) {
+    itemCost *= 2;
+  }
+
   return itemCost;
 }
 
@@ -530,11 +537,12 @@ function calcCost(index) {
   }
 
   if (data.heatApp.app1 && data.heatApp.app2) {
-    total += appCost(breaks[index] * 2) * 2;
+    total += appCost(breaks[index] * 2, 1);
+    total += appCost(breaks[index] * 2, 2);
     total += itemCost(breaks[index], 1);
     total += itemCost(breaks[index], 2);
   } else if (data.heatApp.app1) {
-    total += appCost(breaks[index]);
+    total += appCost(breaks[index], 1);
     total += itemCost(breaks[index], 1);
   }
 
@@ -714,12 +722,4 @@ function clipboard() {
   document.execCommand('copy');
 
   document.getElementById('copy-modal').style.display = 'none';
-}
-
-function selectText(id) {
-  let range = document.createRange();
-  range.selectNode(document.getElementById(id));
-  window.getSelection().removeAllRanges();
-  window.getSelection().addRange(range);
-  document.execCommand('copy');
 }
